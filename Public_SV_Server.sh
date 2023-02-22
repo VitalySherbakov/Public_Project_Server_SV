@@ -7,7 +7,7 @@ gitprojectdir="Server_Nord_Palantir"
 gitprojectrun="BlazorApp1"
 command=""
 # иницилизацыя
-function_init(){
+function function_init(){
 	echo "Настройка Сети на Публикацию"
 	echo "Укажыте IP Стартовое Основное:"
 	read ipone
@@ -92,7 +92,7 @@ function_init(){
 	echo ./$gitprojectrun
 	./$gitprojectrun
 }
-function_run(){
+function function_run(){
 	echo "Напишыте Имя Папки с Проектом:"
 	read dirproject
 	echo "Запуск Проекта..."
@@ -101,7 +101,7 @@ function_run(){
 	echo ./$gitprojectrun
 	./$gitprojectrun
 }
-function_pack11(){
+function function_pack11(){
 	apt-get install ssh -y
 	sudo apt-get install nginx -y
 	sudo apt-get install wget -y
@@ -120,7 +120,7 @@ function_pack11(){
 	apt-get update -y && apt-get upgrade -y
 	echo "Автообновление Завершено!"
 }
-function_delssh(){
+function function_delssh(){
 	sudo apt-get remove ssh
 	apt-get update -y && apt-get upgrade -y
 	echo "Автообновление Завершено!"
@@ -138,19 +138,19 @@ if [ "$distributivelinex" == "Debian" ]; then
 	read command
 	# удалить ssh
 	if ["$command"=="sshrm"]; them
-	function_delssh;
+	function_delssh
 	fi
 	# установка пакетов
 	if ["$command"=="pack"]; them
-	function_pack11;
+	function_pack11
 	fi
 	# установка проекта
 	if ["$command"=="init"]; them
-	function_init;
+	function_init
 	fi
 	# запуск пакетов
 	if ["$command"=="run"]; them
-	function_run;
+	function_run
 	fi
 	if [ "$numberversionlinex" == 10 ]; then
 	echo "Версия: $numberversionlinex"
