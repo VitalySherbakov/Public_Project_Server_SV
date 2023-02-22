@@ -40,7 +40,8 @@ function function_init(){
 	sudo chmod 775 /var/www/dotnet_sites
 	#echo "После просмотра статуса нажымаем клавищы CTRL+C для выхода"
 	#sudo systemctl status nginx.service
-	git clone $gitprojectdown
+	echo "$gitprojectdown"
+	git clone "$gitprojectdown"
 	mkdir "/var/www/dotnet_sites/$dirproject"
 	sudo cp -R "Server_Nord_Palantir/*" "/var/www/dotnet_sites/$dirproject/"
 	rm -r "./Server_Nord_Palantir"
