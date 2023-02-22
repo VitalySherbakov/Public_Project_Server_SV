@@ -140,7 +140,7 @@ if [ "$distributivelinex" == "Debian" ]; then
 	read command
 	# удалить ssh
 	if ["$command"=="sshrm"]; them
-	testing
+	#testing
 	#function_delssh
 	fi
 	# установка пакетов
