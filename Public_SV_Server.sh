@@ -146,6 +146,8 @@ do
 		fi
 	fi
 	if [ "$distributivelinex" == "Ubuntu" ]; then
+		echo "Линекс: $distributivelinex"
+		echo "Пока не доступно!"
 	fi
 	read -p "Нажмите Enter, чтобы продолжить"
 done
