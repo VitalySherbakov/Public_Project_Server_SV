@@ -145,6 +145,9 @@ do
 			if [ "$command" == "exit" ]; then
 				break
 			fi
+			if [ "$command" == "sshrm" ]; then
+				function_delssh
+			fi
 		fi
 		if [ "$numberversionlinex" == 10 ]; then
 			echo "Версия: $numberversionlinex"
