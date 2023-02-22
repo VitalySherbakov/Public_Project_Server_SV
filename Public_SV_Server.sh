@@ -137,19 +137,19 @@ if [ "$distributivelinex" == "Debian" ]; then
 	echo "Введите Команду:"
 	read command
 	# удалить ssh
-	if ["$command"=="sshrm"] them
+	if ["$command"=="sshrm"]; them
 	function_delssh
 	fi
 	# установка пакетов
-	if ["$command"=="pack"] them
+	if ["$command"=="pack"]; them
 	function_pack11
 	fi
 	# установка проекта
-	if ["$command"=="init"] them
+	if ["$command"=="init"]; them
 	function_init
 	fi
 	# запуск пакетов
-	if ["$command"=="run"] them
+	if ["$command"=="run"]; them
 	function_run
 	fi
 	if [ "$numberversionlinex" == 10 ]; then
