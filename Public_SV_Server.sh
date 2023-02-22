@@ -148,6 +148,9 @@ do
 			if [ "$command" == "sshrm" ]; then
 				function_delssh
 			fi
+			if [ "$command" == "pack" ]; then
+				function_pack11
+			fi
 		fi
 		if [ "$numberversionlinex" == 10 ]; then
 			echo "Версия: $numberversionlinex"
