@@ -6,45 +6,8 @@ gitprojectdown="https://github.com/VitalySherbakov/Server_Nord_Palantir"
 gitprojectdir="Server_Nord_Palantir"
 gitprojectrun="BlazorApp1"
 command=""
-if [ "$distributivelinex" == "Debian" ]; then
-	echo "Линекс: $distributivelinex"
-	if [ "$numberversionlinex" == 11 ]; then
-	echo "Версия: $numberversionlinex"
-	echo "Команда: pack (Установка необходимых пакетов)"
-	echo "Команда: init (Установка и настройка проекта)"
-	echo "Команда: sshrm (Удаление ssh доступа)"
-	echo "Команда: run (Запуск проекта)"
-	echo "Введите Команду:"
-	read command
-	# удалить ssh
-	if ["$command"=="sshrm"] them
-	sudo apt-get remove ssh
-	apt-get update -y && apt-get upgrade -y
-	echo "Автообновление Завершено!"
-	echo "SSH Удален!"
-	fi
-	# установка пакетов
-	if ["$command"=="pack"] them
-	apt-get install ssh -y
-	sudo apt-get install nginx -y
-	sudo apt-get install wget -y
-	echo "Загрузка Пакетов 1..."
-	wget "https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb" -O "packages-microsoft-prod.deb"
-	sudo dpkg -i "packages-microsoft-prod.deb"
-	rm "packages-microsoft-prod.deb"
-	echo "Установка Пакетов 2..."
-	sudo apt-get update && \
-    sudo apt-get install -y dotnet-sdk-7.0
-	echo "Установка Пакетов 3..."
-	sudo apt-get update && \
-    sudo apt-get install -y aspnetcore-runtime-7.0
-	echo "Установка Пакетов 4..."
-	sudo apt-get install -y dotnet-runtime-7.0
-	apt-get update -y && apt-get upgrade -y
-	echo "Автообновление Завершено!"
-	fi
-	# установка проекта
-	if ["$command"=="init"] them
+# иницилизацыя
+function_init(){
 	echo "Настройка Сети на Публикацию"
 	echo "Укажыте IP Стартовое Основное:"
 	read ipone
@@ -128,9 +91,8 @@ if [ "$distributivelinex" == "Debian" ]; then
 	cd "/var/www/dotnet_sites/$dirproject/$gitprojectdir"
 	echo ./$gitprojectrun
 	./$gitprojectrun
-	fi
-	# запуск пакетов
-	if ["$command"=="run"] them
+}
+function_run(){
 	echo "Напишыте Имя Папки с Проектом:"
 	read dirproject
 	echo "Запуск Проекта..."
@@ -138,6 +100,57 @@ if [ "$distributivelinex" == "Debian" ]; then
 	cd "/var/www/dotnet_sites/$dirproject/$gitprojectdir"
 	echo ./$gitprojectrun
 	./$gitprojectrun
+}
+function_pack11(){
+	apt-get install ssh -y
+	sudo apt-get install nginx -y
+	sudo apt-get install wget -y
+	echo "Загрузка Пакетов 1..."
+	wget "https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb" -O "packages-microsoft-prod.deb"
+	sudo dpkg -i "packages-microsoft-prod.deb"
+	rm "packages-microsoft-prod.deb"
+	echo "Установка Пакетов 2..."
+	sudo apt-get update && \
+    sudo apt-get install -y dotnet-sdk-7.0
+	echo "Установка Пакетов 3..."
+	sudo apt-get update && \
+    sudo apt-get install -y aspnetcore-runtime-7.0
+	echo "Установка Пакетов 4..."
+	sudo apt-get install -y dotnet-runtime-7.0
+	apt-get update -y && apt-get upgrade -y
+	echo "Автообновление Завершено!"
+}
+function_delssh(){
+	sudo apt-get remove ssh
+	apt-get update -y && apt-get upgrade -y
+	echo "Автообновление Завершено!"
+	echo "SSH Удален!"
+}
+if [ "$distributivelinex" == "Debian" ]; then
+	echo "Линекс: $distributivelinex"
+	if [ "$numberversionlinex" == 11 ]; then
+	echo "Версия: $numberversionlinex"
+	echo "Команда: pack (Установка необходимых пакетов)"
+	echo "Команда: init (Установка и настройка проекта)"
+	echo "Команда: sshrm (Удаление ssh доступа)"
+	echo "Команда: run (Запуск проекта)"
+	echo "Введите Команду:"
+	read command
+	# удалить ssh
+	if ["$command"=="sshrm"] them
+	function_delssh
+	fi
+	# установка пакетов
+	if ["$command"=="pack"] them
+	function_pack11
+	fi
+	# установка проекта
+	if ["$command"=="init"] them
+	function_init
+	fi
+	# запуск пакетов
+	if ["$command"=="run"] them
+	function_run
 	fi
 	if [ "$numberversionlinex" == 10 ]; then
 	echo "Версия: $numberversionlinex"
