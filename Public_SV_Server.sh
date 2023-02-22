@@ -135,6 +135,16 @@ do
 		echo "Линекс: $distributivelinex"
 		if [ "$numberversionlinex" == 11 ]; then
 			echo "Версия: $numberversionlinex"
+			echo "Команда: pack (Установка необходимых пакетов)"
+			echo "Команда: init (Установка и настройка проекта)"
+			echo "Команда: sshrm (Удаление ssh доступа)"
+			echo "Команда: run (Запуск проекта)"
+			echo "Команда: exit (Выход)"
+			echo "Введите Команду:"
+			read command
+			if [ "$command" == "exit" ]; then
+				break
+			fi
 		fi
 		if [ "$numberversionlinex" == 10 ]; then
 			echo "Версия: $numberversionlinex"
