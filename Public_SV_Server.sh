@@ -151,6 +151,12 @@ do
 			if [ "$command" == "pack" ]; then
 				function_pack11
 			fi
+			if [ "$command" == "init" ]; then
+				function_init
+			fi
+			if [ "$command" == "run" ]; then
+				function_run
+			fi
 		fi
 		if [ "$numberversionlinex" == 10 ]; then
 			echo "Версия: $numberversionlinex"
