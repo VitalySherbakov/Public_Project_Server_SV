@@ -61,7 +61,7 @@ if [ "$distributivelinex" == "Debian" ]; then
 	sudo chown -R www-data:www-data /var/www/dotnet_sites
 	sudo chmod 775 /var/www/dotnet_sites
 	echo "После просмотра статуса нажымаем клавищы CTRL+C для выхода"
-	sudo systemctl status nginx.service
+	#sudo systemctl status nginx.service
 	mkdir "/var/www/dotnet_sites/$dirproject"
 	cd "/var/www/dotnet_sites/$dirproject"
 	git clone $gitprojectdown
