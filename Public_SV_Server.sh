@@ -1,13 +1,11 @@
 #!/bin/bash
 echo "Установка и Развертывание Проекта Server SV"
-$distributivelinex=$(lsb_release -is)
-$numberversionlinex=$(lsb_release -rs)
+distributivelinex=$(lsb_release -is)
+numberversionlinex=$(lsb_release -rs)
 if [ "$distributivelinex" == "Debian" ]; then
 	echo "Линекс: $distributivelinex"
 	if [ "$numberversionlinex" == 11 ]; then
 	echo "Версия: $numberversionlinex"
-	git clone https://github.com/VitalySherbakov/Public_Project_Server_SV
-	./Public_SV_Server.sh
 	fi
 	if [ "$numberversionlinex" == 10 ]; then
 	echo "Версия: $numberversionlinex"
