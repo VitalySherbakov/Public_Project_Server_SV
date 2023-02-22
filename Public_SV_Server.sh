@@ -4,7 +4,7 @@ distributivelinex=$(lsb_release -is)
 numberversionlinex=$(lsb_release -rs)
 gitprojectdown="https://github.com/VitalySherbakov/Server_Nord_Palantir"
 gitprojectdir="Server_Nord_Palantir"
-gitprojectrun="BlazorApp1"
+gitprojectrun="MvcTest"
 # иницилизацыя
 function function_init(){
 	echo "Настройка Сети на Публикацию"
@@ -33,20 +33,17 @@ function function_init(){
 	echo "	address $iptwo/24" >> /etc/network/interfaces
 	ip addr add $iptwo dev enp0s3
 	systemctl restart networking.service
-	mkdir projects
+	#mkdir projects
 	sudo mkdir -p /var/www/dotnet_sites
 	sudo chown -R :www-data /var/www/dotnet_sites
 	sudo chown -R www-data:www-data /var/www/dotnet_sites
 	sudo chmod 775 /var/www/dotnet_sites
-	echo "После просмотра статуса нажымаем клавищы CTRL+C для выхода"
+	#echo "После просмотра статуса нажымаем клавищы CTRL+C для выхода"
 	#sudo systemctl status nginx.service
-	mkdir "/var/www/dotnet_sites/$dirproject"
-	cd "/var/www/dotnet_sites/$dirproject"
 	git clone $gitprojectdown
-	cd ..
-	cd ..
-	cd ..
-	cd ..
+	mkdir "/var/www/dotnet_sites/$dirproject"
+	sudo cp -R "Server_Nord_Palantir/*" "/var/www/dotnet_sites/$dirproject/"
+	rm -r "./Server_Nord_Palantir"
 	rm "/etc/hosts"
 	echo "127.0.0.1       localhost" >> /etc/hosts
 	echo "127.0.1.1       debiantest.debiantest   debiantest" >> /etc/hosts
@@ -86,17 +83,17 @@ function function_init(){
 	sudo systemctl restart nginx.service
 	sudo nginx -t
 	echo "Запуск Проекта..."
-	echo "/var/www/dotnet_sites/$dirproject/$gitprojectdir"
-	cd "/var/www/dotnet_sites/$dirproject/$gitprojectdir"
-	echo ./$gitprojectrun
+	echo "Проект: /var/www/dotnet_sites/$dirproject"
+	echo "Запуск: ./$gitprojectrun"
+	cd "/var/www/dotnet_sites/$dirproject"
 	./$gitprojectrun
 }
 function function_run(){
 	echo "Напишыте Имя Папки с Проектом:"
 	read dirproject
 	echo "Запуск Проекта..."
-	echo "/var/www/dotnet_sites/$dirproject/$gitprojectdir"
-	cd "/var/www/dotnet_sites/$dirproject/$gitprojectdir"
+	echo "/var/www/dotnet_sites/$dirproject"
+	cd "/var/www/dotnet_sites/$dirproject"
 	echo ./$gitprojectrun
 	./$gitprojectrun
 }
