@@ -131,5 +131,21 @@ function testing(){
 
 while true
 do
+	if [ "$distributivelinex" == "Debian" ]; then
+		echo "Линекс: $distributivelinex"
+		if [ "$numberversionlinex" == 11 ]; then
+			echo "Версия: $numberversionlinex"
+		fi
+		if [ "$numberversionlinex" == 10 ]; then
+			echo "Версия: $numberversionlinex"
+			echo "Пока не доступно!"
+		fi
+		if [ "$numberversionlinex" == 9 ]; then
+			echo "Версия: $numberversionlinex"
+			echo "Пока не доступно!"
+		fi
+	fi
+	if [ "$distributivelinex" == "Ubuntu" ]; then
+	fi
 	read -p "Нажмите Enter, чтобы продолжить"
 done
