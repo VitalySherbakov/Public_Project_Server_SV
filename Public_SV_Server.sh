@@ -5,7 +5,6 @@ numberversionlinex=$(lsb_release -rs)
 gitprojectdown="https://github.com/VitalySherbakov/Server_Nord_Palantir"
 gitprojectdir="Server_Nord_Palantir"
 gitprojectrun="BlazorApp1"
-command=""
 # иницилизацыя
 function function_init(){
 	echo "Настройка Сети на Публикацию"
