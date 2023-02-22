@@ -128,46 +128,55 @@ function function_delssh(){
 function testing(){
 	echo "testing"
 }
-if [ "$distributivelinex" == "Debian" ]; then
-	echo "Линекс: $distributivelinex"
-	if [ "$numberversionlinex" == 11 ]; then
-	echo "Версия: $numberversionlinex"
-	echo "Команда: pack (Установка необходимых пакетов)"
-	echo "Команда: init (Установка и настройка проекта)"
-	echo "Команда: sshrm (Удаление ssh доступа)"
-	echo "Команда: run (Запуск проекта)"
-	echo "Введите Команду:"
-	read command
-	# удалить ssh
-	if [ "$command" == "sshrm" ]; then
-	function_delssh
+
+while true
+do
+	if [ "$distributivelinex" == "Debian" ]; then
+		echo "Линекс: $distributivelinex"
+		if [ "$numberversionlinex" == 11 ]; then
+		echo "Версия: $numberversionlinex"
+		echo "Команда: pack (Установка необходимых пакетов)"
+		echo "Команда: init (Установка и настройка проекта)"
+		echo "Команда: sshrm (Удаление ssh доступа)"
+		echo "Команда: run (Запуск проекта)"
+		echo "Команда: exit (Выход)"
+		echo "Введите Команду:"
+		read command
+		# удалить ssh
+		if [ "$command" == "exit" ]; then
+			break
+		fi
+		# удалить ssh
+		if [ "$command" == "sshrm" ]; then
+		function_delssh
+		fi
+		# установка пакетов
+		if [ "$command" == "pack" ]; then
+		function_pack11
+		fi
+		# установка проекта
+		if ["$command"=="init"]; then
+		function_init
+		fi
+		# запуск пакетов
+		if ["$command"=="run"]; then
+		function_run
+		fi
+		if [ "$numberversionlinex" == 10 ]; then
+		echo "Версия: $numberversionlinex"
+		echo "Пока не доступно!"
+		fi
+		if [ "$numberversionlinex" == 9 ]; then
+		echo "Версия: $numberversionlinex"
+		echo "Пока не доступно!"
+		fi
 	fi
-	# установка пакетов
-	if [ "$command" == "pack" ]; then
-	function_pack11
+	if [ "$distributivelinex" == "Ubuntu" ]; then
+		echo "Линекс: $distributivelinex"
+		if [ "$numberversionlinex" == 10 ]; then
+		echo "Версия: $numberversionlinex"
+		echo "Пока не доступно!"
+		fi
 	fi
-	# установка проекта
-	if ["$command"=="init"]; then
-	function_init
-	fi
-	# запуск пакетов
-	if ["$command"=="run"]; then
-	function_run
-	fi
-	if [ "$numberversionlinex" == 10 ]; then
-	echo "Версия: $numberversionlinex"
-	echo "Пока не доступно!"
-	fi
-	if [ "$numberversionlinex" == 9 ]; then
-	echo "Версия: $numberversionlinex"
-	echo "Пока не доступно!"
-	fi
-fi
-if [ "$distributivelinex" == "Ubuntu" ]; then
-	echo "Линекс: $distributivelinex"
-	if [ "$numberversionlinex" == 10 ]; then
-	echo "Версия: $numberversionlinex"
-	echo "Пока не доступно!"
-	fi
-fi
-read -p "Нажмите Enter, чтобы продолжить"
+	read -p "Нажмите Enter, чтобы продолжить"
+done
