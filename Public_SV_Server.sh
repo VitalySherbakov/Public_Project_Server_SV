@@ -95,24 +95,26 @@ function function_init(){
 	sudo systemctl restart nginx.service
 	sudo nginx -t
 	echo "Запуск Проекта..."
-	echo "Проект: /var/www/dotnet_sites/$dirproject"
-	echo "Запуск: ./$gitprojectrun"
+	#echo "Проект: /var/www/dotnet_sites/$dirproject"
+	#echo "Запуск: ./$gitprojectrun"
+	sudo chmod 777 "/var/www/dotnet_sites/$dirproject"
 	cd "/var/www/dotnet_sites/$dirproject"
 	./$gitprojectrun
-	read -p "Нажмите Enter, чтобы продолжить"
-	cd ..
-	cd ..
-	cd ..
-	cd ..
-	rm -r "/var/www/dotnet_sites/$dirproject"
+	#read -p "Нажмите Enter, чтобы продолжить"
+	#cd ..
+	#cd ..
+	#cd ..
+	#cd ..
+	#rm -r "/var/www/dotnet_sites/$dirproject"
 }
 function function_run(){
 	echo "Напишыте Имя Папки с Проектом:"
 	read dirproject
 	echo "Запуск Проекта..."
-	echo "/var/www/dotnet_sites/$dirproject"
+	#echo "/var/www/dotnet_sites/$dirproject"
+	sudo chmod 777 "/var/www/dotnet_sites/$dirproject"
 	cd "/var/www/dotnet_sites/$dirproject"
-	echo ./$gitprojectrun
+	#echo ./$gitprojectrun
 	./$gitprojectrun
 }
 function function_pack11(){
