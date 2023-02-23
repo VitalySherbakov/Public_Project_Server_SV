@@ -99,6 +99,11 @@ function function_init(){
 	echo "Запуск: ./$gitprojectrun"
 	cd "/var/www/dotnet_sites/$dirproject"
 	./$gitprojectrun
+	cd ..
+	cd ..
+	cd ..
+	cd ..
+	rm -r "/var/www/dotnet_sites/$dirproject"
 }
 function function_run(){
 	echo "Напишыте Имя Папки с Проектом:"
