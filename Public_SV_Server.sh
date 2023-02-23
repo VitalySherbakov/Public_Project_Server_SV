@@ -5,8 +5,8 @@ numberversionlinex=$(lsb_release -rs)
 gitprojectdown="https://github.com/VitalySherbakov/Server_Nord_Palantir"
 gitprojectdir="Server_Nord_Palantir"
 gitprojectrun="MvcTest"
-# иницилизацыя
-function function_init(){
+# настройка сети
+function function_lan(){
 	echo "Настройка Сети на Публикацию"
 	echo "Укажыте IP Стартовое Основное:"
 	read ipone
@@ -14,10 +14,6 @@ function function_init(){
 	read iptwo
 	echo "Укажыте IP Роутера:"
 	read ipgateway
-	echo "Напишыте Имя Папки с Проектом:"
-	read dirproject
-	echo "Укажыте IP или Хост Проекта для Публикации:"
-	read iphostproject
 	rm "/etc/network/interfaces"
 	echo "# This file describes the network interfaces available on yoyr system" >> /etc/network/interfaces
 	echo "# and how to activate them. For more information, see interfaces(5)" >> /etc/network/interfaces
@@ -33,6 +29,17 @@ function function_init(){
 	echo "	address $iptwo/24" >> /etc/network/interfaces
 	ip addr add $iptwo dev enp0s3
 	systemctl restart networking.service
+	echo "IP Основной: $ipone"
+	echo "IP Дополнительный: $iptwo"
+	echo "IP Источник: $ipgateway"
+	echo "Сеть на Публикацию Настроина!"
+}
+# иницилизацыя
+function function_init(){
+	echo "Напишыте Имя Папки с Проектом:"
+	read dirproject
+	echo "Укажыте IP или Хост Проекта для Публикации:"
+	read iphostproject	
 	#mkdir projects
 	sudo mkdir -p /var/www/dotnet_sites
 	sudo chown -R :www-data /var/www/dotnet_sites
@@ -137,14 +144,18 @@ do
 		if [ "$numberversionlinex" == 11 ]; then
 			echo "Версия: $numberversionlinex"
 			echo "Команда: pack (Установка необходимых пакетов)"
+			echo "Команда: lan (Установка сети на публикацию)"
 			echo "Команда: init (Установка и настройка проекта)"
-			echo "Команда: sshrm (Удаление ssh доступа)"
 			echo "Команда: run (Запуск проекта)"
+			echo "Команда: sshrm (Удаление ssh доступа)"
 			echo "Команда: exit (Выход)"
 			echo "Введите Команду:"
 			read command
 			if [ "$command" == "exit" ]; then
 				break
+			fi
+			if [ "$command" == "lan" ]; then
+				function_lan
 			fi
 			if [ "$command" == "sshrm" ]; then
 				function_delssh
