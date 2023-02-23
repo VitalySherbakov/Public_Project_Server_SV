@@ -99,6 +99,7 @@ function function_init(){
 	echo "Запуск: ./$gitprojectrun"
 	cd "/var/www/dotnet_sites/$dirproject"
 	./$gitprojectrun
+	read -p "Нажмите Enter, чтобы продолжить"
 	cd ..
 	cd ..
 	cd ..
