@@ -54,7 +54,7 @@ function function_init(){
 	read -p "Нажмите Enter, чтобы продолжить"
 	mkdir "/var/www/dotnet_sites/$dirproject"
 	pwddir=$(pwd)
-	sudo cp -R "$pwddir/Server_Nord_Palantir/*" "/var/www/dotnet_sites/$dirproject/"
+	sudo cp -R "$pwddir/Server_Nord_Palantir/." "/var/www/dotnet_sites/$dirproject/"
 	rm -r "./Server_Nord_Palantir"
 	rm "/etc/hosts"
 	echo "127.0.0.1       localhost" >> /etc/hosts
