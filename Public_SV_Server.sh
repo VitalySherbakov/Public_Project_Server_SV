@@ -1,5 +1,5 @@
 #!/bin/bash
-versionscript=1.002
+versionscript=1.003
 echo "Установка и Развертывание Проекта Server SV (Щ.В) (v $versionscript)"
 distributivelinex=$(lsb_release -is)
 numberversionlinex=$(lsb_release -rs)
@@ -58,7 +58,7 @@ function function_init(){
 	ls
 	git clone "$gitprojectdown"
 	ls
-	read -p "Нажмите Enter, чтобы продолжить"
+	#read -p "Нажмите Enter, чтобы продолжить"
 	rm -r "/var/www/dotnet_sites/$dirproject"
 	mkdir "/var/www/dotnet_sites/$dirproject"
 	pwddir=$(pwd)
@@ -101,10 +101,11 @@ function function_init(){
 	echo "	proxy_pass $iphostproject;" >> /etc/nginx/sites-available/$dirproject.local
 	echo "	}" >> /etc/nginx/sites-available/$dirproject.local
 	echo "}" >> /etc/nginx/sites-available/$dirproject.local
+	sudo chmod 777 "/etc/nginx/sites-available/$dirproject.local"
 	sudo cp "/etc/nginx/sites-available/$dirproject.local" "/etc/nginx/sites-enabled/$dirproject.local"
 	sudo chmod 777 "/etc/nginx/sites-enabled/$dirproject.local"
 	sudo systemctl restart nginx.service
-	#sudo nginx -t
+	sudo nginx -t
 	echo "Запуск Проекта..."
 	#echo "Проект: /var/www/dotnet_sites/$dirproject"
 	#echo "Запуск: ./$gitprojectrun"
