@@ -1,5 +1,6 @@
 #!/bin/bash
-echo "Установка и Развертывание Проекта Server SV (Щ.В)"
+versionscript=1.001
+echo "Установка и Развертывание Проекта Server SV (Щ.В) (v $versionscript)"
 distributivelinex=$(lsb_release -is)
 numberversionlinex=$(lsb_release -rs)
 gitprojectdown="https://github.com/VitalySherbakov/Server_Nord_Palantir"
