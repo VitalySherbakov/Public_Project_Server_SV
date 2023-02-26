@@ -8,6 +8,7 @@ gitprojectrun="MvcTest"
 # настройка сети
 function function_lan(){
 	echo "Настройка Сети на Публикацию"
+	ip a
 	echo "Укажыте IP Стартовое Основное:"
 	read ipone
 	echo "Укажыте IP Второе:"
@@ -24,11 +25,12 @@ function function_lan(){
 	echo "auto enp0s3" >> /etc/network/interfaces
 	echo "iface enp0s3 inet static" >> /etc/network/interfaces
 	echo "	address $ipone/24" >> /etc/network/interfaces
-	echo "	gateway $ipgateway/24" >> /etc/network/interfaces
+	echo "	gateway $ipgateway" >> /etc/network/interfaces
 	echo "iface enp0s3 inet static" >> /etc/network/interfaces
 	echo "	address $iptwo/24" >> /etc/network/interfaces
 	ip addr add $iptwo dev enp0s3
 	systemctl restart networking.service
+	ip a
 	echo "IP Основной: $ipone"
 	echo "IP Дополнительный: $iptwo"
 	echo "IP Источник: $ipgateway"
@@ -41,10 +43,10 @@ function function_init(){
 	echo "Укажыте IP или Хост Проекта для Публикации:"
 	read iphostproject	
 	#mkdir projects
-	sudo mkdir -p /var/www/dotnet_sites
+	sudo mkdir -p "/var/www/dotnet_sites"
 	sudo chown -R :www-data /var/www/dotnet_sites
 	sudo chown -R www-data:www-data /var/www/dotnet_sites
-	sudo chmod 775 /var/www/dotnet_sites
+	sudo chmod 775 "/var/www/dotnet_sites"
 	#echo "После просмотра статуса нажымаем клавищы CTRL+C для выхода"
 	#sudo systemctl status nginx.service
 	echo "Путь: $gitprojectdown"
@@ -68,13 +70,16 @@ function function_init(){
 	ping "$dirproject.local"
 	echo "Копирование настроек..."
 	sudo cp "/etc/nginx/sites-available/default" "/etc/nginx/sites-available/$dirproject.local"
-	cd "/etc/nginx/sites-available/"
-	sudo chmod 764 "$dirproject.local"
-	sudo chmod 746 "$dirproject.local"
-	sudo chmod 777 "$dirproject.local"
-	cd ..
-	cd ..
-	cd ..
+	sudo chmod 764 "/etc/nginx/sites-available/$dirproject.local"
+	sudo chmod 746 "/etc/nginx/sites-available/$dirproject.local"
+	sudo chmod 777 "/etc/nginx/sites-available/$dirproject.local"
+	#cd "/etc/nginx/sites-available/"
+	#sudo chmod 764 "$dirproject.local"
+	#sudo chmod 746 "$dirproject.local"
+	#sudo chmod 777 "$dirproject.local"
+	#cd ..
+	#cd ..
+	#cd ..
 	echo "Изменение настроек..."
 	rm "/etc/nginx/sites-available/$dirproject.local"
 	echo "server {" >> /etc/nginx/sites-available/$dirproject.local
@@ -93,12 +98,14 @@ function function_init(){
 	sudo systemctl restart nginx.service
 	sudo ln -s "/etc/nginx/sites-available/$dirproject.local" "/etc/nginx/sites-enabled/$dirproject.local"
 	sudo systemctl restart nginx.service
-	sudo nginx -t
+	#sudo nginx -t
 	echo "Запуск Проекта..."
 	#echo "Проект: /var/www/dotnet_sites/$dirproject"
 	#echo "Запуск: ./$gitprojectrun"
 	sudo chmod 777 "/var/www/dotnet_sites/$dirproject"
+	sudo chmod 777 "/var/www/dotnet_sites/$dirproject/$gitprojectrun"
 	cd "/var/www/dotnet_sites/$dirproject"
+	ip a
 	./$gitprojectrun
 	#read -p "Нажмите Enter, чтобы продолжить"
 	#cd ..
@@ -115,7 +122,12 @@ function function_run(){
 	sudo chmod 777 "/var/www/dotnet_sites/$dirproject"
 	cd "/var/www/dotnet_sites/$dirproject"
 	#echo ./$gitprojectrun
+	ip a
 	./$gitprojectrun
+	cd ..
+	cd ..
+	cd ..
+	cd ..
 }
 function function_pack11(){
 	apt-get install ssh -y
