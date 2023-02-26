@@ -1,5 +1,5 @@
 #!/bin/bash
-versionscript=1.001
+versionscript=1.002
 echo "Установка и Развертывание Проекта Server SV (Щ.В) (v $versionscript)"
 distributivelinex=$(lsb_release -is)
 numberversionlinex=$(lsb_release -rs)
@@ -59,6 +59,7 @@ function function_init(){
 	git clone "$gitprojectdown"
 	ls
 	read -p "Нажмите Enter, чтобы продолжить"
+	rm -r "/var/www/dotnet_sites/$dirproject"
 	mkdir "/var/www/dotnet_sites/$dirproject"
 	pwddir=$(pwd)
 	sudo cp -R "$pwddir/Server_Nord_Palantir/." "/var/www/dotnet_sites/$dirproject/"
