@@ -36,6 +36,10 @@ function function_lan(){
 	echo "IP Источник: $ipgateway"
 	echo "Сеть на Публикацию Настроина!"
 }
+# ip информация
+function function_ipa(){
+	ip a
+}
 # иницилизацыя
 function function_init(){
 	echo "Напишыте Имя Папки с Проектом:"
@@ -167,6 +171,7 @@ do
 			echo "Команда: pack (Установка необходимых пакетов)"
 			echo "Команда: lan (Установка сети на публикацию)"
 			echo "Команда: init (Установка и настройка проекта)"
+			echo "Команда: ip (Информацыя о ip адресах)"
 			echo "Команда: run (Запуск проекта)"
 			echo "Команда: sshrm (Удаление ssh доступа)"
 			echo "Команда: exit (Выход)"
@@ -186,6 +191,9 @@ do
 			fi
 			if [ "$command" == "init" ]; then
 				function_init
+			fi
+			if [ "$command" == "ip" ]; then
+				function_ipa
 			fi
 			if [ "$command" == "run" ]; then
 				function_run
