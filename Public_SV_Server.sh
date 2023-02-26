@@ -65,7 +65,7 @@ function function_init(){
 	rm "/etc/hosts"
 	echo "127.0.0.1       localhost" >> /etc/hosts
 	echo "127.0.1.1       debiantest.debiantest   debiantest" >> /etc/hosts
-	echo "127.0.0.1		$dirproject.local" >> /etc/hosts
+	echo "127.0.0.1	$dirproject.local" >> /etc/hosts
 	echo "# The following lines are desirable for IPv6 capable hosts" >> /etc/hosts
 	echo "::1     localhost ip6-localhost ip6-loopback" >> /etc/hosts
 	echo "ff02::1 ip6-allnodes" >> /etc/hosts
@@ -99,8 +99,8 @@ function function_init(){
 	echo "	proxy_pass $iphostproject;" >> /etc/nginx/sites-available/$dirproject.local
 	echo "	}" >> /etc/nginx/sites-available/$dirproject.local
 	echo "}" >> /etc/nginx/sites-available/$dirproject.local
-	sudo systemctl restart nginx.service
-	sudo ln -s "/etc/nginx/sites-available/$dirproject.local" "/etc/nginx/sites-enabled/$dirproject.local"
+	sudo cp "/etc/nginx/sites-available/$dirproject.local" "/etc/nginx/sites-enabled/$dirproject.local"
+	sudo chmod 777 "/etc/nginx/sites-enabled/$dirproject.local"
 	sudo systemctl restart nginx.service
 	#sudo nginx -t
 	echo "Запуск Проекта..."
