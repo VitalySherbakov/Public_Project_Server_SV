@@ -72,8 +72,8 @@ function function_init(){
 	echo "::1     localhost ip6-localhost ip6-loopback" >> /etc/hosts
 	echo "ff02::1 ip6-allnodes" >> /etc/hosts
 	echo "ff02::2 ip6-allrouters" >> /etc/hosts
-	echo "Запуск Пинга..."
-	ping "$dirproject.local"
+	#echo "Запуск Пинга..."
+	#ping "$dirproject.local"
 	echo "Копирование настроек..."
 	sudo cp "/etc/nginx/sites-available/default" "/etc/nginx/sites-available/$dirproject.local"
 	sudo chmod 764 "/etc/nginx/sites-available/$dirproject.local"
@@ -98,7 +98,7 @@ function function_init(){
 	echo "	server_name $dirproject.local;" >> /etc/nginx/sites-available/$dirproject.local
 	echo "	" >> /etc/nginx/sites-available/$dirproject.local
 	echo "	location / {" >> /etc/nginx/sites-available/$dirproject.local
-	echo "	proxy_pass $iphostproject;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_pass $iphostproject;" >> /etc/nginx/sites-available/$dirproject.local
 	echo "	}" >> /etc/nginx/sites-available/$dirproject.local
 	echo "}" >> /etc/nginx/sites-available/$dirproject.local
 	sudo chmod 777 "/etc/nginx/sites-available/$dirproject.local"
