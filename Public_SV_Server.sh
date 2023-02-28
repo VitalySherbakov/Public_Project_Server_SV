@@ -205,22 +205,22 @@ function function_run(){
 	cd ..
 }
 function function_pack11(){
-	apt-get install ssh -y
-	sudo apt-get install nginx -y
-	sudo apt-get install wget -y
-	echo "Загрузка Пакетов 1..."
-	wget "https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb" -O "packages-microsoft-prod.deb"
-	sudo dpkg -i "packages-microsoft-prod.deb"
-	rm "packages-microsoft-prod.deb"
-	echo "Установка Пакетов 2..."
+	sudo apt-get install ssh -y && \
+	sudo apt-get install nginx -y && \
+	sudo apt-get install wget -y && \
+	echo "Загрузка Пакетов 1..." && \
+	wget "https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb" -O "packages-microsoft-prod.deb" && \
+	sudo dpkg -i "packages-microsoft-prod.deb" && \
+	rm "packages-microsoft-prod.deb" && \
+	echo "Установка Пакетов 2..." && \
 	sudo apt-get update && \
-    sudo apt-get install -y dotnet-sdk-7.0
-	echo "Установка Пакетов 3..."
+    sudo apt-get install -y dotnet-sdk-7.0 && \
+	echo "Установка Пакетов 3..." && \
 	sudo apt-get update && \
-    sudo apt-get install -y aspnetcore-runtime-7.0
-	echo "Установка Пакетов 4..."
-	sudo apt-get install -y dotnet-runtime-7.0
-	apt-get update -y && apt-get upgrade -y
+    sudo apt-get install -y aspnetcore-runtime-7.0 && \
+	echo "Установка Пакетов 4..." && \
+	sudo apt-get install -y dotnet-runtime-7.0 && \
+	apt-get update -y && apt-get upgrade -y && \
 	echo "Автообновление Завершено!"
 }
 function function_delssh(){
