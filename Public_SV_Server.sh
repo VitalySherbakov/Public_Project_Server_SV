@@ -10,7 +10,10 @@ gitprojectrun="MvcTest"
 function function_lan(){
 	echo "Настройка Сети на Публикацию"
 	namelan=$(ls /sys/class/net/ | head -n 1)
-	ip a
+	echo "IP Адреса Машыны"
+	ip addr show
+	echo "IP Шлюза Машыны (Роутер, или WIFI, или Проводной Интернет)"
+	ip route
 	echo "Имя Сетевого Интерфейса: $namelan"
 	echo "Укажыте IP Стартовое Основное:"
 	read ipone
