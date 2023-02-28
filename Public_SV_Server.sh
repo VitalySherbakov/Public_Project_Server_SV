@@ -59,6 +59,7 @@ function function_init2(){
 	echo "Напишыте Имя Папки с Проектом:"
 	read dirproject
 	echo "Укажыте Хост Запуска Проекта"
+	hostrun="http://localhost:5000/"
 	read hostrun
 	echo "IP Адреса Машыны"
 	ip addr show
@@ -239,7 +240,6 @@ do
 			echo "Команда: pack (Установка необходимых пакетов)"
 			echo "Команда: lan (Установка сети на публикацию)"
 			echo "Команда: init (Установка и настройка проекта)"
-			echo "Команда: init2 (Установка и настройка проекта)"
 			echo "Команда: ip (Информацыя о ip адресах)"
 			echo "Команда: run (Запуск проекта)"
 			echo "Команда: sshrm (Удаление ssh доступа)"
@@ -259,9 +259,6 @@ do
 				function_pack11
 			fi
 			if [ "$command" == "init" ]; then
-				function_init
-			fi
-			if [ "$command" == "init2" ]; then
 				function_init2
 			fi
 			if [ "$command" == "ip" ]; then
