@@ -221,7 +221,9 @@ function function_run(){
 }
 function function_list(){
 	# чтение проекта
+	echo "---------Список Проектов---------"
 	cat projects_list.txt
+	echo "---------------------------------"
 }
 function function_pack10(){
 	sudo apt-get install ssh -y && \
