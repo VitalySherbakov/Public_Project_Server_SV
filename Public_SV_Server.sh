@@ -60,6 +60,8 @@ function function_init2(){
 	read dirproject
 	echo "Укажыте Хост Запуска Проекта"
 	read hostrun
+	echo "IP Адреса Машыны"
+	ip addr show
 	echo "Укажыте IP или Хост Проекта для Публикации:"
 	read iphostproject
 	sudo mkdir -p "/var/www/sites"
