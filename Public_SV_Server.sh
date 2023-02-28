@@ -1,5 +1,5 @@
 #!/bin/bash
-versionscript=1.004
+versionscript=1.005
 echo "Установка и Развертывание Проекта Server SV (Щ.В) (v $versionscript)"
 distributivelinex=$(lsb_release -is)
 numberversionlinex=$(lsb_release -rs)
@@ -205,6 +205,25 @@ function function_run(){
 	cd ..
 	cd ..
 }
+function function_pack10(){
+	sudo apt-get install ssh -y && \
+	sudo apt-get install nginx -y && \
+	sudo apt-get install wget -y && \
+	echo "Загрузка Пакетов 1..." && \
+	wget "https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb" -O "packages-microsoft-prod.deb" && \
+	sudo dpkg -i "packages-microsoft-prod.deb" && \
+	rm "packages-microsoft-prod.deb" && \
+	echo "Установка Пакетов 2..." && \
+	sudo apt-get update && \
+    sudo apt-get install -y dotnet-sdk-7.0 && \
+	echo "Установка Пакетов 3..." && \
+	sudo apt-get update && \
+    sudo apt-get install -y aspnetcore-runtime-7.0 && \
+	echo "Установка Пакетов 4..." && \
+	sudo apt-get install -y dotnet-runtime-7.0 && \
+	apt-get update -y && apt-get upgrade -y && \
+	echo "Автообновление Завершено!"
+}
 function function_pack11(){
 	sudo apt-get install ssh -y && \
 	sudo apt-get install nginx -y && \
@@ -273,7 +292,36 @@ do
 		fi
 		if [ "$numberversionlinex" == 10 ]; then
 			echo "Версия: $numberversionlinex"
-			echo "Пока не доступно!"
+			echo "Команда: pack (Установка необходимых пакетов)"
+			echo "Команда: lan (Установка сети на публикацию)"
+			echo "Команда: init (Установка и настройка проекта)"
+			echo "Команда: ip (Информацыя о ip адресах)"
+			echo "Команда: run (Запуск проекта)"
+			echo "Команда: sshrm (Удаление ssh доступа)"
+			echo "Команда: exit (Выход)"
+			echo "Введите Команду:"
+			read command
+			if [ "$command" == "exit" ]; then
+				break
+			fi
+			if [ "$command" == "lan" ]; then
+				function_lan
+			fi
+			if [ "$command" == "sshrm" ]; then
+				function_delssh
+			fi
+			if [ "$command" == "pack" ]; then
+				function_pack10
+			fi
+			if [ "$command" == "init" ]; then
+				function_init2
+			fi
+			if [ "$command" == "ip" ]; then
+				function_ipa
+			fi
+			if [ "$command" == "run" ]; then
+				function_run
+			fi
 		fi
 		if [ "$numberversionlinex" == 9 ]; then
 			echo "Версия: $numberversionlinex"
