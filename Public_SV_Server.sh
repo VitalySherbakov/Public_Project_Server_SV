@@ -1,5 +1,5 @@
 #!/bin/bash
-versionscript=1.007
+versionscript=1.008
 echo "Установка и Развертывание Проекта Server SV (Щ.В) (v $versionscript)"
 distributivelinex=$(lsb_release -is)
 numberversionlinex=$(lsb_release -rs)
@@ -60,7 +60,9 @@ function function_init2(){
 	nameuser=$USER
 	echo "Имя Пользователя: $nameuser"
 	# чтение проекта
+	echo "---------Список Проектов---------"
 	cat projects_list.txt
+	echo "---------------------------------"
 	echo "Напишыте Имя Папки с Проектом:"
 	read dirproject
 	echo "Укажыте Хост Запуска Проекта (http://localhost:5000/)"
@@ -108,13 +110,15 @@ function function_init2(){
 	sudo nginx -t
 	sudo systemctl restart nginx
 	sudo chmod 777 "/var/www/sites/$dirproject/$gitprojectrun"
-	cd "/var/www/sites/$dirproject"
 	ip a
 	# запись проекта
 	echo "$dirproject | $dirproject.local | $iphostproject | $gitprojectrun" >> projects_list.txt
 	# чтение проекта
+	echo "---------Список Проектов---------"
 	cat projects_list.txt
+	echo "---------------------------------"
 	echo "Адресс Проекта: $iphostproject"
+	cd "/var/www/sites/$dirproject"
 	./$gitprojectrun
 }
 # иницилизацыя
@@ -199,15 +203,16 @@ function function_init(){
 }
 function function_run(){
 	# чтение проекта
+	echo "---------Список Проектов---------"
 	cat projects_list.txt
+	echo "---------------------------------"
 	echo "Напишыте Имя Папки с Проектом:"
 	read dirproject
 	echo "Запуск Проекта..."
 	#echo "/var/www/dotnet_sites/$dirproject"
 	sudo chmod 777 "/var/www/sites/$dirproject"
-	cd "/var/www/sites/$dirproject"
-	#echo ./$gitprojectrun
 	ip a
+	cd "/var/www/sites/$dirproject"
 	./$gitprojectrun
 	cd ..
 	cd ..
