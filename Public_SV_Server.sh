@@ -77,9 +77,6 @@ function function_init2(){
 	rm -r "$pwddir/Server_Nord_Palantir"
 	# Использование /etc/hosts
 	# Создание настроек...
-	echo "Создание настроек..."
-	#sudo nano "/etc/nginx/sites-available/$dirproject"
-	#sudo chmod 777 "/etc/nginx/sites-available/$dirproject"
 	# Изменение настроек...
 	echo "Изменение настроек..."
 	rm "/etc/nginx/sites-available/$dirproject.local"
