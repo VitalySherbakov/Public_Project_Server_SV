@@ -94,8 +94,8 @@ function function_init2(){
 	echo "	  proxy_set_header   Connection keep-alive;" >> /etc/nginx/sites-available/$dirproject.local
 	echo "	  proxy_set_header   Host \$host;" >> /etc/nginx/sites-available/$dirproject.local
 	echo "	  proxy_cache_bypass \$http_upgrade;" >> /etc/nginx/sites-available/$dirproject.local
-	echo "	  proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;" >> /etc/nginx/sites-available/$dirproject.local
-	echo "	  proxy_set_header   X-Forwarded-Proto $scheme;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_set_header   X-Forwarded-For \$proxy_add_x_forwarded_for;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_set_header   X-Forwarded-Proto \$scheme;" >> /etc/nginx/sites-available/$dirproject.local
 	echo "	}" >> /etc/nginx/sites-available/$dirproject.local
 	echo "}" >> /etc/nginx/sites-available/$dirproject.local
 	sudo chmod 777 "/etc/nginx/sites-available/$dirproject.local"
