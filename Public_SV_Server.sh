@@ -78,8 +78,8 @@ function function_init2(){
 	# Использование /etc/hosts
 	# Создание настроек...
 	echo "Создание настроек..."
-	sudo nano "/etc/nginx/sites-available/$dirproject"
-	sudo chmod 777 "/etc/nginx/sites-available/$dirproject"
+	#sudo nano "/etc/nginx/sites-available/$dirproject"
+	#sudo chmod 777 "/etc/nginx/sites-available/$dirproject"
 	# Изменение настроек...
 	echo "Изменение настроек..."
 	rm "/etc/nginx/sites-available/$dirproject"
@@ -98,6 +98,7 @@ function function_init2(){
 	echo "	  proxy_set_header   X-Forwarded-Proto $scheme;" >> /etc/nginx/sites-available/$dirproject
 	echo "	}" >> /etc/nginx/sites-available/$dirproject
 	echo "}" >> /etc/nginx/sites-available/$dirproject
+	sudo chmod 777 "/etc/nginx/sites-available/$dirproject"
 	sudo ln -s "/etc/nginx/sites-available/$dirproject" "/etc/nginx/sites-enabled/"
 	sudo chmod 777 "/etc/nginx/sites-enabled/$dirproject"
 	sudo systemctl restart nginx.service
