@@ -340,6 +340,9 @@ do
 			if [ "$command" == "init" ]; then
 				function_init2
 			fi
+			if [ "$command" == "list" ]; then
+				function_list
+			fi
 			if [ "$command" == "ip" ]; then
 				function_ipa
 			fi
