@@ -59,6 +59,8 @@ function function_ipa(){
 function function_init2(){
 	nameuser=$USER
 	echo "Имя Пользователя: $nameuser"
+	# чтение проекта
+	less projects_list.txt
 	echo "Напишыте Имя Папки с Проектом:"
 	read dirproject
 	echo "Укажыте Хост Запуска Проекта (http://localhost:5000/)"
@@ -108,6 +110,8 @@ function function_init2(){
 	sudo chmod 777 "/var/www/sites/$dirproject/$gitprojectrun"
 	cd "/var/www/sites/$dirproject"
 	ip a
+	# запись проекта
+	echo "$dirproject | $dirproject.local | $iphostproject | $gitprojectrun" >> projects_list.txt
 	echo "Адресс Проекта: $iphostproject"
 	./$gitprojectrun
 }
@@ -192,6 +196,8 @@ function function_init(){
 	#rm -r "/var/www/dotnet_sites/$dirproject"
 }
 function function_run(){
+	# чтение проекта
+	less projects_list.txt
 	echo "Напишыте Имя Папки с Проектом:"
 	read dirproject
 	echo "Запуск Проекта..."
