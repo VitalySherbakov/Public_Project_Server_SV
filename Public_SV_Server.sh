@@ -177,9 +177,9 @@ function function_init(){
 	echo "Запуск Проекта..."
 	#echo "Проект: /var/www/dotnet_sites/$dirproject"
 	#echo "Запуск: ./$gitprojectrun"
-	sudo chmod 777 "/var/www/dotnet_sites/$dirproject"
-	sudo chmod 777 "/var/www/dotnet_sites/$dirproject/$gitprojectrun"
-	cd "/var/www/dotnet_sites/$dirproject"
+	sudo chmod 777 "/var/www/sites/$dirproject"
+	sudo chmod 777 "/var/www/sites/$dirproject/$gitprojectrun"
+	cd "/var/www/sites/$dirproject"
 	ip a
 	./$gitprojectrun
 	#read -p "Нажмите Enter, чтобы продолжить"
@@ -194,8 +194,8 @@ function function_run(){
 	read dirproject
 	echo "Запуск Проекта..."
 	#echo "/var/www/dotnet_sites/$dirproject"
-	sudo chmod 777 "/var/www/sites/$dirproject"
-	cd "/var/www/sites/$dirproject"
+	sudo chmod 777 "/var/www/sites/$dirproject.local"
+	cd "/var/www/sites/$dirproject.local"
 	#echo ./$gitprojectrun
 	ip a
 	./$gitprojectrun
