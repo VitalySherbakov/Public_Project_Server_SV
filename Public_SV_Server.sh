@@ -194,8 +194,8 @@ function function_run(){
 	read dirproject
 	echo "Запуск Проекта..."
 	#echo "/var/www/dotnet_sites/$dirproject"
-	sudo chmod 777 "/var/www/sites/$dirproject.local"
-	cd "/var/www/sites/$dirproject.local"
+	sudo chmod 777 "/var/www/sites/$dirproject"
+	cd "/var/www/sites/$dirproject"
 	#echo ./$gitprojectrun
 	ip a
 	./$gitprojectrun
@@ -224,9 +224,9 @@ function function_pack11(){
 	echo "Автообновление Завершено!"
 }
 function function_delssh(){
-	sudo apt-get remove ssh
+	sudo apt-get remove ssh && \
 	apt-get update -y && apt-get upgrade -y
-	echo "Автообновление Завершено!"
+	echo "Автообновление Завершено!" && \
 	echo "SSH Удален!"
 }
 function testing(){
