@@ -41,6 +41,62 @@ function function_lan(){
 function function_ipa(){
 	ip a
 }
+function function_init2(){
+	echo "Напишыте Имя Папки с Проектом:"
+	read dirproject
+	echo "Укажыте IP или Хост Проекта для Публикации:"
+	read iphostproject
+	sudo mkdir -p "/var/www/dotnet_sites"
+	sudo chown -R :www-data /var/www/dotnet_sites
+	sudo chown -R www-data:www-data /var/www/dotnet_sites
+	sudo chmod 775 "/var/www/dotnet_sites"
+	sudo chmod 777 "/var/www/dotnet_sites"
+	echo "Путь: $gitprojectdown"
+	ls
+	git clone "$gitprojectdown"
+	ls
+	rm -r "/var/www/dotnet_sites/$dirproject"
+	mkdir "/var/www/dotnet_sites/$dirproject"
+	pwddir=$(pwd)
+	sudo cp -R "$pwddir/Server_Nord_Palantir/." "/var/www/dotnet_sites/$dirproject/"
+	rm -r "$pwddir/Server_Nord_Palantir"
+	# Использование /etc/hosts
+	# Копирование настроек...
+	echo "Копирование настроек..."
+	sudo cp "/etc/nginx/sites-available/default" "/etc/nginx/sites-available/$dirproject.local"
+	sudo chmod 764 "/etc/nginx/sites-available/$dirproject.local"
+	sudo chmod 746 "/etc/nginx/sites-available/$dirproject.local"
+	sudo chmod 777 "/etc/nginx/sites-available/$dirproject.local"
+	# Изменение настроек...
+	echo "Изменение настроек..."
+	rm "/etc/nginx/sites-available/$dirproject.local"
+	echo "server {" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	listen 80;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	server_name example.com;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	location / {" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_pass $iphostproject;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_http_version 1.1;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_set_header   Upgrade $http_upgrade;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_set_header   Connection keep-alive;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_set_header   Host $host;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_cache_bypass $http_upgrade;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_set_header   X-Forwarded-Proto $scheme;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	}" >> /etc/nginx/sites-available/$dirproject.local
+	echo "}" >> /etc/nginx/sites-available/$dirproject.local
+	sudo chmod 777 "/etc/nginx/sites-available/$dirproject.local"
+	sudo cp "/etc/nginx/sites-available/$dirproject.local" "/etc/nginx/sites-enabled/$dirproject.local"
+	sudo chmod 777 "/etc/nginx/sites-enabled/$dirproject.local"
+	sudo systemctl restart nginx.service
+	sudo nginx -t
+	ln -s "/etc/nginx/sites-available/$dirproject.local" "/etc/nginx/sites-enabled/"
+	systemctl restart nginx
+	sudo chmod 777 "/var/www/dotnet_sites/$dirproject/$gitprojectrun"
+	cd "/var/www/dotnet_sites/$dirproject"
+	ip a
+	./$gitprojectrun
+}
 # иницилизацыя
 function function_init(){
 	echo "Напишыте Имя Папки с Проектом:"
@@ -174,6 +230,7 @@ do
 			echo "Команда: pack (Установка необходимых пакетов)"
 			echo "Команда: lan (Установка сети на публикацию)"
 			echo "Команда: init (Установка и настройка проекта)"
+			echo "Команда: init2 (Установка и настройка проекта)"
 			echo "Команда: ip (Информацыя о ip адресах)"
 			echo "Команда: run (Запуск проекта)"
 			echo "Команда: sshrm (Удаление ssh доступа)"
@@ -194,6 +251,9 @@ do
 			fi
 			if [ "$command" == "init" ]; then
 				function_init
+			fi
+			if [ "$command" == "init2" ]; then
+				function_init2
 			fi
 			if [ "$command" == "ip" ]; then
 				function_ipa
