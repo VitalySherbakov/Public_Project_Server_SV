@@ -9,7 +9,9 @@ gitprojectrun="MvcTest"
 # настройка сети
 function function_lan(){
 	echo "Настройка Сети на Публикацию"
+	namelan=$(ls /sys/class/net/ | head -n 1)
 	ip a
+	echo "Имя Сетевого Интерфейса: $namelan"
 	echo "Укажыте IP Стартовое Основное:"
 	read ipone
 	echo "Укажыте IP Второе:"
@@ -23,18 +25,25 @@ function function_lan(){
 	echo "source /etc/network/interfaces.d/*" >> /etc/network/interfaces
 	echo "" >> /etc/network/interfaces
 	echo "# The loopback network interface" >> /etc/network/interfaces
-	echo "auto enp0s3" >> /etc/network/interfaces
-	echo "iface enp0s3 inet static" >> /etc/network/interfaces
+	echo "auto lo" >> /etc/network/interfaces
+	echo "iface lo inet loopback" >> /etc/network/interfaces
+	echo "" >> /etc/network/interfaces
+	echo "auto $namelan" >> /etc/network/interfaces
+	echo "iface $namelan inet static" >> /etc/network/interfaces
 	echo "	address $ipone/24" >> /etc/network/interfaces
+	echo "	#netmask 255.255.255.0" >> /etc/network/interfaces
 	echo "	gateway $ipgateway" >> /etc/network/interfaces
-	echo "iface enp0s3 inet static" >> /etc/network/interfaces
+	echo "	#dns-nameservers 8.8.8.8 8.8.4.4" >> /etc/network/interfaces
+	echo "iface $namelan inet static" >> /etc/network/interfaces
 	echo "	address $iptwo/24" >> /etc/network/interfaces
-	ip addr add $iptwo dev enp0s3
+	#ip addr add $iptwo dev $namelan
 	systemctl restart networking.service
 	ip a
 	echo "IP Основной: $ipone"
 	echo "IP Дополнительный: $iptwo"
 	echo "IP Источник: $ipgateway"
+	echo "Если нужно откоректировать выполните команду"
+	echo "nano /etc/network/interfaces"
 	echo "Сеть на Публикацию Настроина!"
 }
 # ip информация
@@ -42,58 +51,55 @@ function function_ipa(){
 	ip a
 }
 function function_init2(){
+	nameuser=$USER
+	echo "Имя Пользователя: $nameuser"
 	echo "Напишыте Имя Папки с Проектом:"
 	read dirproject
+	echo "Укажыте Хост Запуска Проекта"
+	read hostrun
 	echo "Укажыте IP или Хост Проекта для Публикации:"
 	read iphostproject
-	sudo mkdir -p "/var/www/dotnet_sites"
-	sudo chown -R :www-data /var/www/dotnet_sites
-	sudo chown -R www-data:www-data /var/www/dotnet_sites
-	sudo chmod 775 "/var/www/dotnet_sites"
-	sudo chmod 777 "/var/www/dotnet_sites"
+	sudo mkdir -p "/var/www/sites"
+	sudo chown -R $nameuser:$nameuser /var/www/sites
 	echo "Путь: $gitprojectdown"
 	ls
 	git clone "$gitprojectdown"
 	ls
-	rm -r "/var/www/dotnet_sites/$dirproject"
-	mkdir "/var/www/dotnet_sites/$dirproject"
+	rm -r "/var/www/sites/$dirproject"
+	mkdir "/var/www/sites/$dirproject"
 	pwddir=$(pwd)
-	sudo cp -R "$pwddir/Server_Nord_Palantir/." "/var/www/dotnet_sites/$dirproject/"
+	sudo cp -R "$pwddir/Server_Nord_Palantir/." "/var/www/sites/$dirproject/"
 	rm -r "$pwddir/Server_Nord_Palantir"
 	# Использование /etc/hosts
-	# Копирование настроек...
-	echo "Копирование настроек..."
-	sudo cp "/etc/nginx/sites-available/default" "/etc/nginx/sites-available/$dirproject.local"
-	sudo chmod 764 "/etc/nginx/sites-available/$dirproject.local"
-	sudo chmod 746 "/etc/nginx/sites-available/$dirproject.local"
-	sudo chmod 777 "/etc/nginx/sites-available/$dirproject.local"
+	# Создание настроек...
+	echo "Создание настроек..."
+	sudo nano "/etc/nginx/sites-available/$dirproject"
+	sudo chmod 777 "/etc/nginx/sites-available/$dirproject"
 	# Изменение настроек...
 	echo "Изменение настроек..."
-	rm "/etc/nginx/sites-available/$dirproject.local"
-	echo "server {" >> /etc/nginx/sites-available/$dirproject.local
-	echo "	listen 80;" >> /etc/nginx/sites-available/$dirproject.local
-	echo "	server_name example.com;" >> /etc/nginx/sites-available/$dirproject.local
-	echo "	" >> /etc/nginx/sites-available/$dirproject.local
-	echo "	location / {" >> /etc/nginx/sites-available/$dirproject.local
-	echo "	  proxy_pass $iphostproject;" >> /etc/nginx/sites-available/$dirproject.local
-	echo "	  proxy_http_version 1.1;" >> /etc/nginx/sites-available/$dirproject.local
-	echo "	  proxy_set_header   Upgrade $http_upgrade;" >> /etc/nginx/sites-available/$dirproject.local
-	echo "	  proxy_set_header   Connection keep-alive;" >> /etc/nginx/sites-available/$dirproject.local
-	echo "	  proxy_set_header   Host $host;" >> /etc/nginx/sites-available/$dirproject.local
-	echo "	  proxy_cache_bypass $http_upgrade;" >> /etc/nginx/sites-available/$dirproject.local
-	echo "	  proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;" >> /etc/nginx/sites-available/$dirproject.local
-	echo "	  proxy_set_header   X-Forwarded-Proto $scheme;" >> /etc/nginx/sites-available/$dirproject.local
-	echo "	}" >> /etc/nginx/sites-available/$dirproject.local
-	echo "}" >> /etc/nginx/sites-available/$dirproject.local
-	sudo chmod 777 "/etc/nginx/sites-available/$dirproject.local"
-	sudo cp "/etc/nginx/sites-available/$dirproject.local" "/etc/nginx/sites-enabled/$dirproject.local"
-	sudo chmod 777 "/etc/nginx/sites-enabled/$dirproject.local"
+	rm "/etc/nginx/sites-available/$dirproject"
+	echo "server {" >> /etc/nginx/sites-available/$dirproject
+	echo "	listen 80;" >> /etc/nginx/sites-available/$dirproject
+	echo "	server_name $iphostproject;" >> /etc/nginx/sites-available/$dirproject
+	echo "	" >> /etc/nginx/sites-available/$dirproject
+	echo "	location / {" >> /etc/nginx/sites-available/$dirproject
+	echo "	  proxy_pass $hostrun;" >> /etc/nginx/sites-available/$dirproject
+	echo "	  proxy_http_version 1.1;" >> /etc/nginx/sites-available/$dirproject
+	echo "	  proxy_set_header   Upgrade $http_upgrade;" >> /etc/nginx/sites-available/$dirproject
+	echo "	  proxy_set_header   Connection keep-alive;" >> /etc/nginx/sites-available/$dirproject
+	echo "	  proxy_set_header   Host $host;" >> /etc/nginx/sites-available/$dirproject
+	echo "	  proxy_cache_bypass $http_upgrade;" >> /etc/nginx/sites-available/$dirproject
+	echo "	  proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;" >> /etc/nginx/sites-available/$dirproject
+	echo "	  proxy_set_header   X-Forwarded-Proto $scheme;" >> /etc/nginx/sites-available/$dirproject
+	echo "	}" >> /etc/nginx/sites-available/$dirproject
+	echo "}" >> /etc/nginx/sites-available/$dirproject
+	sudo ln -s "/etc/nginx/sites-available/$dirproject" "/etc/nginx/sites-enabled/"
+	sudo chmod 777 "/etc/nginx/sites-enabled/$dirproject"
 	sudo systemctl restart nginx.service
 	sudo nginx -t
-	ln -s "/etc/nginx/sites-available/$dirproject.local" "/etc/nginx/sites-enabled/"
-	systemctl restart nginx
-	sudo chmod 777 "/var/www/dotnet_sites/$dirproject/$gitprojectrun"
-	cd "/var/www/dotnet_sites/$dirproject"
+	sudo systemctl restart nginx
+	sudo chmod 777 "/var/www/sites/$dirproject/$gitprojectrun"
+	cd "/var/www/sites/$dirproject"
 	ip a
 	./$gitprojectrun
 }
@@ -182,8 +188,8 @@ function function_run(){
 	read dirproject
 	echo "Запуск Проекта..."
 	#echo "/var/www/dotnet_sites/$dirproject"
-	sudo chmod 777 "/var/www/dotnet_sites/$dirproject"
-	cd "/var/www/dotnet_sites/$dirproject"
+	sudo chmod 777 "/var/www/sites/$dirproject"
+	cd "/var/www/sites/$dirproject"
 	#echo ./$gitprojectrun
 	ip a
 	./$gitprojectrun
