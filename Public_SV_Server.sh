@@ -1,5 +1,5 @@
 #!/bin/bash
-versionscript=1.003
+versionscript=1.004
 echo "Установка и Развертывание Проекта Server SV (Щ.В) (v $versionscript)"
 distributivelinex=$(lsb_release -is)
 numberversionlinex=$(lsb_release -rs)
