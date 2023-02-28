@@ -108,6 +108,7 @@ function function_init2(){
 	sudo chmod 777 "/var/www/sites/$dirproject/$gitprojectrun"
 	cd "/var/www/sites/$dirproject"
 	ip a
+	echo "Адресс Проекта: $iphostproject"
 	./$gitprojectrun
 }
 # иницилизацыя
