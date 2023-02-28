@@ -1,5 +1,5 @@
 #!/bin/bash
-versionscript=1.006
+versionscript=1.007
 echo "Установка и Развертывание Проекта Server SV (Щ.В) (v $versionscript)"
 distributivelinex=$(lsb_release -is)
 numberversionlinex=$(lsb_release -rs)
@@ -60,7 +60,7 @@ function function_init2(){
 	nameuser=$USER
 	echo "Имя Пользователя: $nameuser"
 	# чтение проекта
-	less projects_list.txt
+	cat projects_list.txt
 	echo "Напишыте Имя Папки с Проектом:"
 	read dirproject
 	echo "Укажыте Хост Запуска Проекта (http://localhost:5000/)"
@@ -112,6 +112,8 @@ function function_init2(){
 	ip a
 	# запись проекта
 	echo "$dirproject | $dirproject.local | $iphostproject | $gitprojectrun" >> projects_list.txt
+	# чтение проекта
+	cat projects_list.txt
 	echo "Адресс Проекта: $iphostproject"
 	./$gitprojectrun
 }
@@ -197,7 +199,7 @@ function function_init(){
 }
 function function_run(){
 	# чтение проекта
-	less projects_list.txt
+	cat projects_list.txt
 	echo "Напишыте Имя Папки с Проектом:"
 	read dirproject
 	echo "Запуск Проекта..."
@@ -211,6 +213,10 @@ function function_run(){
 	cd ..
 	cd ..
 	cd ..
+}
+function function_list(){
+	# чтение проекта
+	cat projects_list.txt
 }
 function function_pack10(){
 	sudo apt-get install ssh -y && \
@@ -269,6 +275,7 @@ do
 			echo "Команда: pack (Установка необходимых пакетов)"
 			echo "Команда: lan (Установка сети на публикацию)"
 			echo "Команда: init (Установка и настройка проекта)"
+			echo "Команда: list (Список Проектов)"
 			echo "Команда: ip (Информацыя о ip адресах)"
 			echo "Команда: run (Запуск проекта)"
 			echo "Команда: sshrm (Удаление ssh доступа)"
@@ -289,6 +296,9 @@ do
 			fi
 			if [ "$command" == "init" ]; then
 				function_init2
+			fi
+			if [ "$command" == "list" ]; then
+				function_list
 			fi
 			if [ "$command" == "ip" ]; then
 				function_ipa
