@@ -51,7 +51,10 @@ function function_lan(){
 }
 # ip информация
 function function_ipa(){
-	ip a
+	echo "IP Адреса Машыны"
+	ip addr show
+	echo "IP Шлюза Машыны (Роутер, или WIFI, или Проводной Интернет)"
+	ip route
 }
 function function_init2(){
 	nameuser=$USER
