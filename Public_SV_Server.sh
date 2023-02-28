@@ -82,25 +82,25 @@ function function_init2(){
 	#sudo chmod 777 "/etc/nginx/sites-available/$dirproject"
 	# Изменение настроек...
 	echo "Изменение настроек..."
-	rm "/etc/nginx/sites-available/$dirproject"
-	echo "server {" >> /etc/nginx/sites-available/$dirproject
-	echo "	listen 80;" >> /etc/nginx/sites-available/$dirproject
-	echo "	server_name $iphostproject;" >> /etc/nginx/sites-available/$dirproject
-	echo "	" >> /etc/nginx/sites-available/$dirproject
-	echo "	location / {" >> /etc/nginx/sites-available/$dirproject
-	echo "	  proxy_pass $hostrun;" >> /etc/nginx/sites-available/$dirproject
-	echo "	  proxy_http_version 1.1;" >> /etc/nginx/sites-available/$dirproject
-	echo "	  proxy_set_header   Upgrade $http_upgrade;" >> /etc/nginx/sites-available/$dirproject
-	echo "	  proxy_set_header   Connection keep-alive;" >> /etc/nginx/sites-available/$dirproject
-	echo "	  proxy_set_header   Host $host;" >> /etc/nginx/sites-available/$dirproject
-	echo "	  proxy_cache_bypass $http_upgrade;" >> /etc/nginx/sites-available/$dirproject
-	echo "	  proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;" >> /etc/nginx/sites-available/$dirproject
-	echo "	  proxy_set_header   X-Forwarded-Proto $scheme;" >> /etc/nginx/sites-available/$dirproject
-	echo "	}" >> /etc/nginx/sites-available/$dirproject
-	echo "}" >> /etc/nginx/sites-available/$dirproject
-	sudo chmod 777 "/etc/nginx/sites-available/$dirproject"
-	sudo ln -s "/etc/nginx/sites-available/$dirproject" "/etc/nginx/sites-enabled/"
-	sudo chmod 777 "/etc/nginx/sites-enabled/$dirproject"
+	rm "/etc/nginx/sites-available/$dirproject.local"
+	echo "server {" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	listen 80;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	server_name $iphostproject;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	location / {" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_pass $hostrun;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_http_version 1.1;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_set_header   Upgrade $http_upgrade;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_set_header   Connection keep-alive;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_set_header   Host $host;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_cache_bypass $http_upgrade;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	  proxy_set_header   X-Forwarded-Proto $scheme;" >> /etc/nginx/sites-available/$dirproject.local
+	echo "	}" >> /etc/nginx/sites-available/$dirproject.local
+	echo "}" >> /etc/nginx/sites-available/$dirproject.local
+	sudo chmod 777 "/etc/nginx/sites-available/$dirproject.local"
+	sudo ln -s "/etc/nginx/sites-available/$dirproject.local" "/etc/nginx/sites-enabled/"
+	sudo chmod 777 "/etc/nginx/sites-enabled/$dirproject.local"
 	sudo systemctl restart nginx.service
 	sudo nginx -t
 	sudo systemctl restart nginx
