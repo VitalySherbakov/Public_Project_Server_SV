@@ -5,7 +5,7 @@ distributivelinex=$(lsb_release -is)
 numberversionlinex=$(lsb_release -rs)
 gitprojectdown="https://github.com/VitalySherbakov/Server_Nord_Palantir"
 gitprojectdir="Server_Nord_Palantir"
-gitprojectrun="MvcTest"
+gitprojectrun="Server_Nord_Palantir"
 # настройка сети
 function function_lan(){
 	echo "Настройка Сети на Публикацию"
