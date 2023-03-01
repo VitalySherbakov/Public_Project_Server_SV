@@ -195,14 +195,13 @@ function function_init(){
 	ip a
 	./$gitprojectrun
 	#read -p "Нажмите Enter, чтобы продолжить"
-	#cd ..
-	#cd ..
-	#cd ..
-	#cd ..
+	cd ..
+	cd ..
+	cd ..
+	cd ..
 	#rm -r "/var/www/dotnet_sites/$dirproject"
 }
 function function_run(){
-	# чтение проекта
 	echo "---------Список Проектов---------"
 	cat projects_list.txt
 	echo "---------------------------------"
