@@ -129,6 +129,8 @@ function function_clear(){
 	sudo mkdir -p "/var/www/sites"
 	sudo chown -R $nameuser:$nameuser /var/www/sites
 	# настройки
+	sudo mkdir -p "/var/www/available_tmp/default"
+	sudo chown -R $nameuser:$nameuser /var/www/available_tmp/default
 	sudo cp -R "$pwddir/etc/nginx/sites-available/default" "/var/www/available_tmp/default"
 	rm -r "/etc/nginx/sites-available"
 	sudo mkdir -p "/etc/nginx/sites-available"
@@ -136,6 +138,8 @@ function function_clear(){
 	sudo cp -R "$pwddir/var/www/available_tmp/default" "$pwddir/etc/nginx/sites-available/default"
 	rm -r "/var/www/available_tmp"
 	# настройки 2
+	sudo mkdir -p "/var/www/enabled_tmp/default"
+	sudo chown -R $nameuser:$nameuser /var/www/enabled_tmp/default
 	sudo cp -R "$pwddir/etc/nginx/sites-enabled/default" "/var/www/enabled_tmp/default"
 	rm -r "/etc/nginx/sites-enabled"
 	sudo mkdir -p "/etc/nginx/sites-enabled"
