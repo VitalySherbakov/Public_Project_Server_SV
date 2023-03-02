@@ -121,6 +121,29 @@ function function_init2(){
 	cd "/var/www/sites/$dirproject"
 	./$gitprojectrun
 }
+function function_clear(){
+	echo "Очистка Всего"
+	nameuser=$USER
+	pwddir=$(pwd)
+	rm -r "/var/www/sites"
+	sudo mkdir -p "/var/www/sites"
+	sudo chown -R $nameuser:$nameuser /var/www/sites
+	# настройки
+	sudo cp -R "$pwddir/etc/nginx/sites-available/default" "/var/www/available_tmp/default"
+	rm -r "/etc/nginx/sites-available"
+	sudo mkdir -p "/etc/nginx/sites-available"
+	sudo chown -R $nameuser:$nameuser /etc/nginx/sites-available
+	sudo cp -R "$pwddir/var/www/available_tmp/default" "$pwddir/etc/nginx/sites-available/default"
+	rm -r "/var/www/available_tmp"
+	# настройки 2
+	sudo cp -R "$pwddir/etc/nginx/sites-enabled/default" "/var/www/enabled_tmp/default"
+	rm -r "/etc/nginx/sites-enabled"
+	sudo mkdir -p "/etc/nginx/sites-enabled"
+	sudo chown -R $nameuser:$nameuser /etc/nginx/sites-enabled
+	sudo cp -R "$pwddir/var/www/enabled_tmp/default" "$pwddir/etc/nginx/sites-enabled/default"
+	rm -r "/var/www/enabled_tmp"
+	echo "Очистка Закончина!"
+}
 # иницилизацыя
 function function_init(){
 	echo "Напишыте Имя Папки с Проектом:"
@@ -281,6 +304,7 @@ do
 			echo "Команда: pack (Установка необходимых пакетов)"
 			echo "Команда: lan (Установка сети на публикацию)"
 			echo "Команда: init (Установка и настройка проекта)"
+			echo "Команда: clear (Удалить все проектов)"
 			echo "Команда: list (Список Проектов)"
 			echo "Команда: ip (Информацыя о ip адресах)"
 			echo "Команда: run (Запуск проекта)"
@@ -293,6 +317,9 @@ do
 			fi
 			if [ "$command" == "lan" ]; then
 				function_lan
+			fi
+			if [ "$command" == "clear" ]; then
+				function_clear
 			fi
 			if [ "$command" == "sshrm" ]; then
 				function_delssh
@@ -318,6 +345,7 @@ do
 			echo "Команда: pack (Установка необходимых пакетов)"
 			echo "Команда: lan (Установка сети на публикацию)"
 			echo "Команда: init (Установка и настройка проекта)"
+			echo "Команда: clear (Удалить все проектов)"
 			echo "Команда: ip (Информацыя о ip адресах)"
 			echo "Команда: run (Запуск проекта)"
 			echo "Команда: sshrm (Удаление ssh доступа)"
@@ -329,6 +357,9 @@ do
 			fi
 			if [ "$command" == "lan" ]; then
 				function_lan
+			fi
+			if [ "$command" == "clear" ]; then
+				function_clear
 			fi
 			if [ "$command" == "sshrm" ]; then
 				function_delssh
