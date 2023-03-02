@@ -1,5 +1,5 @@
 #!/bin/bash
-versionscript=1.009
+versionscript=1.010
 echo "Установка и Развертывание Проекта Server SV (Щ.В) (v $versionscript)"
 distributivelinex=$(lsb_release -is)
 numberversionlinex=$(lsb_release -rs)
@@ -142,6 +142,7 @@ function function_clear(){
 	sudo chown -R $nameuser:$nameuser /etc/nginx/sites-enabled
 	sudo cp -R "$pwddir/var/www/enabled_tmp/default" "$pwddir/etc/nginx/sites-enabled/default"
 	rm -r "/var/www/enabled_tmp"
+	rm -r "$pwddir/projects_list.txt"
 	echo "Очистка Закончина!"
 }
 # иницилизацыя
