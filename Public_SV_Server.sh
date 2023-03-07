@@ -65,9 +65,9 @@ function function_init2(){
 	echo "---------------------------------"
 	echo "Напишыте Имя Папки с Проектом:"
 	read dirproject
-	echo "Укажыте Хост Запуска Проекта (http://localhost:5000/)"
-	hostrun="http://localhost:5000/"
-	read hostrun
+	echo "Укажыте Хост Запуска Проекта (http или https)"
+	read hostrunhttp
+	hostrun="$hostrunhttp://localhost:5000/"
 	echo "IP Адреса Машыны"
 	ip addr show
 	echo "Укажыте IP или Хост Проекта для Публикации:"
