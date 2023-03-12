@@ -56,6 +56,9 @@ function function_ipa(){
 	echo "IP Шлюза Машыны (Роутер, или WIFI, или Проводной Интернет)"
 	ip route
 }
+function function_init3(){
+	nameuser=$USER
+}
 function function_init2(){
 	nameuser=$USER
 	echo "Имя Пользователя: $nameuser"
