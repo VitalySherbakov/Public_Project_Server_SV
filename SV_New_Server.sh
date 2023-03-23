@@ -4,7 +4,14 @@ echo "Установка и Развертывание Проекта Server SV 
 distributivelinex=$(lsb_release -is)
 numberversionlinex=$(lsb_release -rs)
 pythonversion=3.8.0
+pythonrun="python3.8"
+gitprojectdownlama="https://github.com/antimatter15/alpaca.cpp"
+function function_update(){
+	apt-get update -y && apt-get upgrade -y && \
+	echo "Автообновление Завершено!"
+}
 function function_pack(){
+	nameuser=$USER
 	sudo apt-get install build-essential -y && \
 	sudo apt-get install zlib1g-dev -y && \
 	sudo apt-get install libncurses5-dev -y && \
@@ -24,7 +31,59 @@ function function_pack(){
 	sudo make altinstall && \
 	apt-get update -y && apt-get upgrade -y && \
 	echo "Автообновление Завершено!" && \
-	echo "Установка Пакетов Завершена 2!"
+	rm -r "Python-$pythonversion.tgz" && \
+	echo "Установка Пакетов Завершена 2!" && \
+	$pythonrun --version && \
+	echo "Команда Вызова" && \
+	echo "$pythonrun script.py"
+	cd "/home/$nameuser"
+}
+function function_lama(){
+	nameuser=$USER
+    sudo apt-get install wget -y && \ 
+	mkdir Projects && \
+	cd Projects/ && \
+	mkdir alpaka && \
+	cd alpaka/ && \
+	echo "Клонирвание Проекта" && \
+	git clone "$gitprojectdownlama" && \
+	cd alpaka.cpp/ && \
+	ls && \
+	make && \
+	cd "/home/$nameuser" && \
+	apt-get update -y && apt-get upgrade -y && \
+	echo "Автообновление Завершено!" && \
+	echo "Lama Создана!"
+}
+function function_runlama1(){
+	nameuser=$USER
+	cd "Projects/alpaka/alpaka.cpp" && \
+	ls && \
+	./chat
+	cd "/home/$nameuser"
+}
+function function_runlama2(){
+	nameuser=$USER
+	cd "Projects/alpaka/alpaka.cpp" && \
+	ls && \
+	/chat -m ggml-alpaca-13b-q4.bin
+	cd "/home/$nameuser"
+}
+function function_down_min(){
+	nameuser=$USER
+	cd "Projects/alpaka/alpaka.cpp" && \
+	ls && \
+	wget "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1g3RDV6M2G3L-0v5h4KQ_2ZQpdDi8fu1R" -O "ggml-alpaca-7b-q4.bin"
+	rm -r "ggml-alpaca-13b-q4.bin"
+	cd "/home/$nameuser"
+}
+function function_down_norm(){
+	nameuser=$USER
+	cd "Projects/alpaka/alpaka.cpp" && \
+	ls && \
+	wget "https://gateway.estuary.tech/gw/ipfs/Qme6wyw9MzqbrUMpFNVq42rC1kSdko7MGT9CL7o1u9Cv9G" -O "ggml-alpaca-13b-q4.bin"
+	rm -r "ggml-alpaca-7b-q4.bin"
+	cd "/home/$nameuser"
 }
 while true
 do
@@ -32,10 +91,30 @@ do
 		echo "Линекс: $distributivelinex"
 		if [ "$numberversionlinex" == 11 ]; then
 			echo "Версия: $numberversionlinex"
-			echo "Команда: pack (Установка необходимых пакетов)"
+			echo "Команда: python (Установка python)"
+			echo "Команда: lama (Установка lama)"
+			echo "Команда: lama_down_min (Загрузка модели lama min)"
+			echo "Команда: lama_down_norm (Загрузка модели lama norm)"
+			echo "Команда: lama_ran1 (Запуск lama min)"
+			echo "Команда: lama_ran2 (Запуск lama norm)"
 			read command
-			if [ "$command" == "pack" ]; then
+			if [ "$command" == "lama_down_min" ]; then
+				function_down_min
+			fi
+			if [ "$command" == "lama_down_norm" ]; then
+				function_down_norm
+			fi
+			if [ "$command" == "python" ]; then
 				function_pack
+			fi
+			if [ "$command" == "lama" ]; then
+				function_lama
+			fi
+			if [ "$command" == "lama_ran1" ]; then
+				function_runlama1
+			fi
+			if [ "$command" == "lama_ran2" ]; then
+				function_runlama2
 			fi
 		fi
 		if [ "$numberversionlinex" == 10 ]; then

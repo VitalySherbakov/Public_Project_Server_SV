@@ -58,6 +58,110 @@ function function_ipa(){
 }
 function function_init3(){
 	nameuser=$USER
+	echo "Имя Пользователя: $nameuser"
+	# чтение проекта
+	echo "---------Список Проектов---------"
+	cat projects_list.txt
+	echo "---------------------------------"
+	echo "Напишыте Имя Папки с Проектом:"
+	read dirproject
+	echo "Укажыте Хост Запуска Проекта (http или https)"
+	read hostrunhttp
+	hostrun="$hostrunhttp://localhost:5000/"
+	echo "IP Адреса Машыны"
+	ip addr show
+	echo "Укажыте IP или Хост Проекта для Публикации:"
+	read iphostproject
+	sudo mkdir -p "/var/www/sites"
+	sudo chown -R $nameuser:$nameuser /var/www/sites
+	echo "Путь: $gitprojectdown"
+	ls
+	git clone "$gitprojectdown"
+	ls
+	rm -r "/var/www/sites/$dirproject"
+	mkdir "/var/www/sites/$dirproject"
+	pwddir=$(pwd)
+	sudo cp -R "$pwddir/Server_Nord_Palantir/." "/var/www/sites/$dirproject/"
+	rm -r "$pwddir/Server_Nord_Palantir"
+	echo "Изменение настроек..."
+	filenginx="/etc/nginx/nginx.conf"
+	rm -r $filenginx
+	echo "user www-data;" >> $filenginx
+	echo "worker_processer auto;" >> $filenginx
+	echo "pid /run/nginx.pid;" >> $filenginx
+	echo "include /etc/nginx/modules-enabled/*.conf;" >> $filenginx
+	echo "" >> $filenginx
+	echo "events {" >> $filenginx
+	echo "        worker_connection 768;" >> $filenginx
+	echo "        # multi_accept on;" >> $filenginx
+	echo "}" >> $filenginx
+	echo "" >> $filenginx
+	echo "http {" >> $filenginx
+	echo "        server {" >> $filenginx
+	echo "                listen $iphostproject;" >> $filenginx
+	echo "                location / {" >> $filenginx
+	echo "                   proxy_pass $hostrun;" >> $filenginx
+	echo "                   proxy_http_version 1.1;" >> $filenginx
+	echo "                   proxy_set_header Upgrade $http_upgrade;" >> $filenginx
+	echo "                   proxy_set_header Connection keep-alive;" >> $filenginx
+	echo "                   proxy_set_header Host $host;" >> $filenginx
+	echo "                   proxy_cache_bypass $http_upgrade;" >> $filenginx
+	echo "                   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;" >> $filenginx
+	echo "                   proxy_set_header X-Forwarded-Proto $scheme;" >> $filenginx
+	echo "                   }" >> $filenginx
+	echo "               }" >> $filenginx
+	echo "               ##" >> $filenginx
+	echo "               # Basic Settings" >> $filenginx
+	echo "               ##" >> $filenginx
+	echo "" >> $filenginx
+	echo "               sendfile on;" >> $filenginx
+	echo "               tcp_nopush on;" >> $filenginx
+	echo "               types_hash_max_size 2048;" >> $filenginx
+	echo "               # server_tokens off;" >> $filenginx
+	echo "" >> $filenginx
+	echo "               # server_names_hash_bucket_size 64;" >> $filenginx
+	echo "               # server_names_in_redirect off;" >> $filenginx
+	echo "" >> $filenginx
+	echo "               include /etc/nginx/mime.types;" >> $filenginx
+	echo "               default_type application/octet-stream;" >> $filenginx
+	echo "" >> $filenginx
+	echo "               ##" >> $filenginx
+	echo "               # SSL Settings" >> $filenginx
+	echo "               ##" >> $filenginx
+	echo "" >> $filenginx
+	echo "               ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3; #Dropping SSLv3, ref: POOf: POOODLE" >> $filenginx
+	echo "               ssl_prefer_server_ciphers on;" >> $filenginx
+	echo "" >> $filenginx
+	echo "               ##" >> $filenginx
+	echo "               # Logging Settings" >> $filenginx
+	echo "               ##" >> $filenginx
+	echo "" >> $filenginx
+	echo "               access_log /var/log/nginx/access.log;" >> $filenginx
+	echo "               error_log /var/log/nginx/error.log;" >> $filenginx
+	echo "" >> $filenginx
+	echo "               ##" >> $filenginx
+	echo "               # Gzip Settings" >> $filenginx
+	echo "               ##" >> $filenginx
+	echo "" >> $filenginx
+	echo "               gzip on;" >> $filenginx
+	echo "" >> $filenginx
+	echo "               # gzip_vary on;" >> $filenginx
+	echo "               # gzip_proxied any;" >> $filenginx
+	echo "               # gzip_comp_level 6;" >> $filenginx
+	echo "               # gzip_buffers 16 8k;" >> $filenginx
+	echo "               # gzip_http_version 1.1;" >> $filenginx
+	echo "               # gzip_types text/plain text/css application/json application/javascript text/xml application/xml+rss text/javascript;" >> $filenginx
+	echo "" >> $filenginx
+	echo "               ##" >> $filenginx
+	echo "               # Virtual Host Configs" >> $filenginx
+	echo "               ##" >> $filenginx
+	echo "" >> $filenginx
+	echo "include /etc/nginx/conf.d/*.conf;" >> $filenginx
+	echo "include /etc/nginx/sites-enabled/*;" >> $filenginx
+	echo "}" >> $filenginx
+	echo "" >> $filenginx
+	echo "" >> $filenginx
+	echo "#mail {" >> $filenginx
 }
 function function_init2(){
 	nameuser=$USER
@@ -336,7 +440,7 @@ do
 				function_pack11
 			fi
 			if [ "$command" == "init" ]; then
-				function_init2
+				function_init3
 			fi
 			if [ "$command" == "list" ]; then
 				function_list
