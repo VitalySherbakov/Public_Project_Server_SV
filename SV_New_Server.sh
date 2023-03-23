@@ -61,6 +61,7 @@ function function_lama(){
 	cd "alpaca.cpp/" && \
 	ls && \
 	make && \
+	ls && \
 	cd "/home/$nameuser" && \
 	apt-get update -y && apt-get upgrade -y && \
 	echo "Автообновление Завершено!" && \
@@ -68,21 +69,21 @@ function function_lama(){
 }
 function function_runlama1(){
 	nameuser=$USER
-	cd "Projects/alpaka/alpaka.cpp" && \
+	cd "Projects/alpaca/alpaca.cpp" && \
 	ls && \
 	./chat
 	cd "/home/$nameuser"
 }
 function function_runlama2(){
 	nameuser=$USER
-	cd "Projects/alpaka/alpaka.cpp" && \
+	cd "Projects/alpaca/alpaca.cpp" && \
 	ls && \
 	/chat -m ggml-alpaca-13b-q4.bin
 	cd "/home/$nameuser"
 }
 function function_down_min(){
 	nameuser=$USER
-	cd "Projects/alpaka/alpaka.cpp" && \
+	cd "Projects/alpaca/alpaca.cpp" && \
 	ls && \
 	wget "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1g3RDV6M2G3L-0v5h4KQ_2ZQpdDi8fu1R" -O "ggml-alpaca-7b-q4.bin"
 	rm -r "ggml-alpaca-13b-q4.bin"
@@ -90,7 +91,7 @@ function function_down_min(){
 }
 function function_down_norm(){
 	nameuser=$USER
-	cd "Projects/alpaka/alpaka.cpp" && \
+	cd "Projects/alpaca/alpaca.cpp" && \
 	ls && \
 	wget "https://gateway.estuary.tech/gw/ipfs/Qme6wyw9MzqbrUMpFNVq42rC1kSdko7MGT9CL7o1u9Cv9G" -O "ggml-alpaca-13b-q4.bin"
 	rm -r "ggml-alpaca-7b-q4.bin"
