@@ -54,9 +54,9 @@ function function_lama(){
 	cd "alpaca/" && \
 	echo "Клонирвание Проекта" && \
 	git clone "$gitprojectdownlama" && \
-	cd "alpaca.cpp/" && \
 	sudo chown -R $nameuser:$nameuser "alpaca.cpp" && \
 	sudo chmod 777 "alpaca.cpp" && \
+	cd "alpaca.cpp/" && \
 	ls && \
 	make && \
 	cd "/home/$nameuser" && \
