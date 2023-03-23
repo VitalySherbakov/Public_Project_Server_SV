@@ -85,17 +85,19 @@ function function_down_min(){
 	nameuser=$USER
 	cd "Projects/alpaca/alpaca.cpp" && \
 	ls && \
-	wget "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1g3RDV6M2G3L-0v5h4KQ_2ZQpdDi8fu1R" -O "ggml-alpaca-7b-q4.bin"
-	rm -r "ggml-alpaca-13b-q4.bin"
+	wget "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1g3RDV6M2G3L-0v5h4KQ_2ZQpdDi8fu1R" -O "ggml-alpaca-7b-q4.bin" && \
+	rm -r "ggml-alpaca-13b-q4.bin" && \
+	echo "Модель lama min Загружена!" && \
 	cd "/home/$nameuser"
 }
 function function_down_norm(){
 	nameuser=$USER
 	cd "Projects/alpaca/alpaca.cpp" && \
 	ls && \
-	wget "https://gateway.estuary.tech/gw/ipfs/Qme6wyw9MzqbrUMpFNVq42rC1kSdko7MGT9CL7o1u9Cv9G" -O "ggml-alpaca-13b-q4.bin"
-	rm -r "ggml-alpaca-7b-q4.bin"
-	cd "/home/$nameuser"
+	wget "https://gateway.estuary.tech/gw/ipfs/Qme6wyw9MzqbrUMpFNVq42rC1kSdko7MGT9CL7o1u9Cv9G" -O "ggml-alpaca-13b-q4.bin" && \
+	rm -r "ggml-alpaca-7b-q4.bin" && \
+	echo "Модель lama norm Загружена!" && \
+	cd "/home/$nameuser" 
 }
 while true
 do
