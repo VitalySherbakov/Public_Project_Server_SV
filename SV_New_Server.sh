@@ -46,13 +46,17 @@ function function_lama(){
 	rm -r "Projects" && \
 	sudo mkdir -p "Projects" && \
 	sudo chown -R $nameuser:$nameuser "Projects" && \
+	sudo chmod 777 "Projects" && \
 	cd "Projects/" && \
 	sudo mkdir -p "alpaka" && \
 	sudo chown -R $nameuser:$nameuser "alpaka" && \
+	sudo chmod 777 "alpaka" && \
 	cd "alpaka/" && \
 	echo "Клонирвание Проекта" && \
 	git clone "$gitprojectdownlama" && \
 	cd "alpaka.cpp/" && \
+	sudo chown -R $nameuser:$nameuser "alpaka.cpp" && \
+	sudo chmod 777 "alpaka.cpp" && \
 	ls && \
 	make && \
 	cd "/home/$nameuser" && \
