@@ -12,6 +12,7 @@ function function_update(){
 }
 function function_pack(){
 	nameuser=$USER
+	sudo apt-get install wget -y && \
 	sudo apt-get install build-essential -y && \
 	sudo apt-get install zlib1g-dev -y && \
 	sudo apt-get install libncurses5-dev -y && \
