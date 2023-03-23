@@ -42,6 +42,7 @@ function function_pack(){
 function function_lama(){
 	nameuser=$USER
     sudo apt-get install wget -y && \
+	sudo apt install build-essential -y && \
 	sudo apt-get install make -y && \
 	cd "/home/$nameuser" && \
 	rm -r "Projects" && \
