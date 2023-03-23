@@ -45,6 +45,7 @@ function function_lama(){
 	sudo apt install build-essential -y && \
 	sudo apt-get install make -y && \
 	cd "/home/$nameuser" && \
+	sudo mkdir -p "Projects" && \
 	rm -r "Projects" && \
 	sudo mkdir -p "Projects" && \
 	sudo chown -R $nameuser:$nameuser "Projects" && \
