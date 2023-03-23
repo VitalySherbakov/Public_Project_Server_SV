@@ -42,13 +42,15 @@ function function_pack(){
 function function_lama(){
 	nameuser=$USER
     sudo apt-get install wget -y && \ 
-	mkdir Projects && \
-	cd Projects/ && \
-	mkdir alpaka && \
-	cd alpaka/ && \
+	sudo mkdir -p "Projects" && \
+	sudo chown -R $nameuser:$nameuser "Projects" && \
+	cd "Projects/" && \
+	sudo mkdir -p "alpaka" && \
+	sudo chown -R $nameuser:$nameuser "alpaka" && \
+	cd "alpaka/" && \
 	echo "Клонирвание Проекта" && \
 	git clone "$gitprojectdownlama" && \
-	cd alpaka.cpp/ && \
+	cd "alpaka.cpp/" && \
 	ls && \
 	make && \
 	cd "/home/$nameuser" && \
