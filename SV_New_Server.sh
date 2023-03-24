@@ -62,7 +62,9 @@ function function_lama(){
 	cd "alpaca.cpp/" && \
 	ls && \
 	make && \
+	echo "----------------------------------" && \
 	ls && \
+	echo "----------------------------------" && \
 	cd "/home/$nameuser" && \
 	apt-get update -y && apt-get upgrade -y && \
 	echo "Автообновление Завершено!" && \

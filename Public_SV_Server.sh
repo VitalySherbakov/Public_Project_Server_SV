@@ -78,6 +78,7 @@ function function_init3(){
 	ls
 	git clone "$gitprojectdown"
 	ls
+	mkdir "/var/www/sites/$dirproject"
 	rm -r "/var/www/sites/$dirproject"
 	mkdir "/var/www/sites/$dirproject"
 	pwddir=$(pwd)
