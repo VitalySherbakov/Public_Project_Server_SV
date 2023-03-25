@@ -106,7 +106,6 @@ while true
 do
 	if [ "$distributivelinex" == "Debian" ]; then
 		echo "Линекс: $distributivelinex"
-		echo "Версия: $numberversionlinex"
 		if [ "$numberversionlinex" == 11 ]; then
 			echo "Версия: $numberversionlinex"
 			echo "Команда: python (Установка python)"
@@ -145,7 +144,6 @@ do
 	fi
 	if [ "$distributivelinex" == "Ubuntu" ]; then
 		echo "Линекс: $distributivelinex"
-		echo "Версия: $numberversionlinex"
 		if [ "$numberversionlinex" == 20.04 ]; then
 			echo "Версия: $numberversionlinex"
 			echo "Команда: python (Установка python)"
@@ -174,7 +172,17 @@ do
 				function_runlama2
 			fi
 		fi
-		if [ "$numberversionlinex" == 20.04 ]; then
+		if [ "$numberversionlinex" == 22.10 ]; then
+			echo "Версия: $numberversionlinex"
+		fi
+		if [ "$numberversionlinex" == 18.04 ]; then
+			echo "Версия: $numberversionlinex"
+		fi
+		if [ "$numberversionlinex" == 16.04 ]; then
+			echo "Версия: $numberversionlinex"
+		fi
+		if [ "$numberversionlinex" == 14.04 ]; then
+			echo "Версия: $numberversionlinex"
 		fi
 	fi
 	read -p "Нажмите Enter, чтобы продолжить"
