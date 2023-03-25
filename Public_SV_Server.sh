@@ -163,8 +163,26 @@ function function_init3(){
 	echo "" >> $filenginx
 	echo "" >> $filenginx
 	echo "#mail {" >> $filenginx
-	echo "#      #See sample authentication script at:" >> $filenginx
-	echo "#      #http://wiki.nginx.org/ImapAuthenticateWithApachePhpScript" >> $filenginx
+	echo "#      # See sample authentication script at:" >> $filenginx
+	echo "#      # http://wiki.nginx.org/ImapAuthenticateWithApachePhpScript" >> $filenginx
+	echo "#" >> $filenginx
+	echo "#      # auth_http localhost/auth.php" >> $filenginx
+	echo "#      # pop3_capabilities \"TOP\" \"USER\"" >> $filenginx
+	echo "#      # auth_http localhost/auth.php" >> $filenginx
+	echo "#" >> $filenginx
+	echo "#		 server {" >> $filenginx
+	echo "#		         listen localhost:110;" >> $filenginx
+	echo "#		         protocol pop3;" >> $filenginx
+	echo "#		         proxy on;" >> $filenginx
+	echo "#		 }" >> $filenginx
+	echo "#" >> $filenginx
+	echo "#		 server {" >> $filenginx
+	echo "#		         listen localhost:143;" >> $filenginx
+	echo "#		         protocol imap;" >> $filenginx
+	echo "#		         proxy on;" >> $filenginx
+	echo "#		 }" >> $filenginx
+	echo "#}" >> $filenginx
+	
 }
 function function_init2(){
 	nameuser=$USER
