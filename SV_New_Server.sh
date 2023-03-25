@@ -173,8 +173,6 @@ do
 				function_runlama2
 			fi
 		fi
-		if [ "$numberversionlinex" == 10 ]; then
-		fi
 	fi
 	read -p "Нажмите Enter, чтобы продолжить"
 done
