@@ -144,7 +144,34 @@ do
 	fi
 	if [ "$distributivelinex" == "Ubuntu" ]; then
 		echo "Линекс: $distributivelinex"
-		echo "Пока не доступно!"
+		if [ "$numberversionlinex" == 11 ]; then
+			echo "Версия: $numberversionlinex"
+			echo "Команда: python (Установка python)"
+			echo "Команда: lama (Установка lama)"
+			echo "Команда: lama_down_min (Загрузка модели lama min)"
+			echo "Команда: lama_down_norm (Загрузка модели lama norm)"
+			echo "Команда: lama_ran1 (Запуск lama min)"
+			echo "Команда: lama_ran2 (Запуск lama norm)"
+			read command
+			if [ "$command" == "lama_down_min" ]; then
+				function_down_min
+			fi
+			if [ "$command" == "lama_down_norm" ]; then
+				function_down_norm
+			fi
+			if [ "$command" == "python" ]; then
+				function_pack
+			fi
+			if [ "$command" == "lama" ]; then
+				function_lama
+			fi
+			if [ "$command" == "lama_ran1" ]; then
+				function_runlama1
+			fi
+			if [ "$command" == "lama_ran2" ]; then
+				function_runlama2
+			fi
+		fi
 	fi
 	read -p "Нажмите Enter, чтобы продолжить"
 done

@@ -163,6 +163,8 @@ function function_init3(){
 	echo "" >> $filenginx
 	echo "" >> $filenginx
 	echo "#mail {" >> $filenginx
+	echo "#      #See sample authentication script at:" >> $filenginx
+	echo "#      #http://wiki.nginx.org/ImapAuthenticateWithApachePhpScript" >> $filenginx
 }
 function function_init2(){
 	nameuser=$USER
