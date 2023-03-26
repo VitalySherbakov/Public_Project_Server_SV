@@ -10,7 +10,6 @@ function function_lama(){
 	sudo apt-get install wget -y && \
 	sudo apt install build-essential -y && \
 	sudo apt-get install make -y && \
-	cd "/home/$nameuser" && \
 	sudo mkdir -p "Projects" && \
 	rm -r "Projects" && \
 	sudo mkdir -p "Projects" && \
@@ -31,7 +30,6 @@ function function_lama(){
 	echo "----------------------------------" && \
 	ls && \
 	echo "----------------------------------" && \
-	cd "/home/$nameuser" && \
 	apt-get update -y && apt-get upgrade -y && \
 	echo "Автообновление Завершено!" && \
 	echo "Lama Создана!"
@@ -43,6 +41,31 @@ do
 		echo "Линекс: $distributivelinex"
 		if [ "$numberversionlinex" == 20.04 ]; then
 			echo "Версия: $numberversionlinex"
+			echo "Команда: python (Установка python)"
+			echo "Команда: lama (Установка lama)"
+			echo "Команда: lama_down_min (Загрузка модели lama min)"
+			echo "Команда: lama_down_norm (Загрузка модели lama norm)"
+			echo "Команда: lama_ran1 (Запуск lama min)"
+			echo "Команда: lama_ran2 (Запуск lama norm)"
+			read command
+			if [ "$command" == "lama_down_min" ]; then
+				function_down_min
+			fi
+			if [ "$command" == "lama_down_norm" ]; then
+				function_down_norm
+			fi
+			if [ "$command" == "python" ]; then
+				function_pack
+			fi
+			if [ "$command" == "lama" ]; then
+				function_lama
+			fi
+			if [ "$command" == "lama_ran1" ]; then
+				function_runlama1
+			fi
+			if [ "$command" == "lama_ran2" ]; then
+				function_runlama2
+			fi
 		fi
 		if [ "$numberversionlinex" == 22.10 ]; then
 			echo "Версия: $numberversionlinex"
