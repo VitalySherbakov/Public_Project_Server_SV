@@ -35,12 +35,12 @@ function function_lama(){
 	echo "Lama Создана!"
 }
 function function_runlama1(){
-	cd "Projects/alpaca/alpaca.cpp" && \
+	cd "/content/Projects/alpaca/alpaca.cpp" && \
 	ls && \
 	./chat
 }
 function function_runlama2(){
-	cd "Projects/alpaca/alpaca.cpp" && \
+	cd "/content/Projects/alpaca/alpaca.cpp" && \
 	ls && \
 	/chat -m ggml-alpaca-13b-q4.bin
 }
