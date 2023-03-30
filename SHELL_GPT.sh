@@ -7,7 +7,7 @@ pythonversion=3.8.0
 pythonrun="python3.8"
 gitprojectdownlama="https://github.com/antimatter15/alpaca.cpp"
 function function_pack(){
-	pip3 install shell-gpt -y && \
+	pip install shell-gpt -y && \
 	echo "Адррес: https://platform.openai.com/account/api-keys" && \
 	echo "Введите Ключь API ChatGPT" && \
 	sgpt
