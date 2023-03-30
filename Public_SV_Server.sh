@@ -182,7 +182,20 @@ function function_init3(){
 	echo "#		         proxy on;" >> $filenginx
 	echo "#		 }" >> $filenginx
 	echo "#}" >> $filenginx
-	
+	sudo chmod 777 "$filenginx"
+	sudo systemctl restart nginx.service
+	sudo nginx -t
+	sudo systemctl restart nginx
+	ip a
+	# запись проекта
+	echo "$dirproject | $dirproject.local | $iphostproject | $gitprojectrun" >> projects_list.txt
+	# чтение проекта
+	echo "---------Список Проектов---------"
+	cat projects_list.txt
+	echo "---------------------------------"
+	echo "Адресс Проекта: $iphostproject"
+	cd "/var/www/sites/$dirproject"
+	./$gitprojectrun
 }
 function function_init2(){
 	nameuser=$USER
