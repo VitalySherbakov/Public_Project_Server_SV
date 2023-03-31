@@ -41,6 +41,11 @@ function function_pack2(){
 	echo "$pythonrun script.py"
 	cd "/home/$nameuser"
 }
+function function_keyapi(){
+	echo "Введите ID Файла: "
+	read idfile
+	rm -r "keyapi.txt" || wget "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=$idfile" -O "keyapi.txt" && cat "keyapi.txt"
+}
 while true
 do
 	if [ "$distributivelinex" == "Debian" ]; then
@@ -49,6 +54,7 @@ do
 			echo "Версия: $numberversionlinex"
 			echo "Команда: python (Установка python)"
 			echo "Команда: shell (Установка shell-gpt)"
+			echo "Команда: keyapi (Ключь shell-gpt)"
 			echo "-------------------------------------------"
 			echo "Команда: sgpt --help"
 			echo "Команда: sgpt \"Раскажы про Апельсин\""
@@ -65,6 +71,9 @@ do
 			fi
 			if [ "$command" == "python" ]; then
 				function_pack2
+			fi
+			if [ "$command" == "keyapi" ]; then
+				function_keyapi
 			fi
 		fi
 		if [ "$numberversionlinex" == 10 ]; then
