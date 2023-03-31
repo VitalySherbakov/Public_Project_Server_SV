@@ -46,7 +46,7 @@ function function_keyapi(){
 	read idfile
 	rm -r "keyapi.txt" || wget "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=$idfile" -O "keyapi.txt" 
 	echo ""
-	keygpt=$(cat keyapi.txt)
+	keygpt=$(cat "keyapi.txt")
 	echo "Ключь API ChatGPT: $keygpt"
 }
 while true
