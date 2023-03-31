@@ -44,7 +44,7 @@ function function_pack2(){
 function function_keyapi(){
 	echo "Введите ID Файла: "
 	read idfile
-	rm -r "keyapi.txt" || wget "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=$idfile" -O "keyapi.txt" && cat "keyapi.txt"
+	rm -r "keyapi.txt" || wget "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=$idfile" -O "keyapi.txt" && echo "\n" && cat "keyapi.txt"
 }
 while true
 do
